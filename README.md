@@ -1,2 +1,2 @@
 # PicShare
-Web to share pictures with each other
+Web to share pictures or videos with each other.
