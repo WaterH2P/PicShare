@@ -1,0 +1,155 @@
+body {
+    padding-top: 56px!important;
+    min-width: 768px;
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    font-size: 17px;
+
+    margin: 0;
+}
+
+nav{
+    height: 56px;
+    display: block;
+}
+
+div{
+    display: block;
+}
+
+a {
+    cursor: pointer;
+    background-color: transparent;
+    color: #337ab7;
+    text-decoration: none;
+}
+
+
+/* ==================== ==== ==================== */
+
+
+.navbar{
+    border-radius: 4px;
+
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.navbar_default{
+    background-color: #fff;
+    border-color: #f0f0f0;
+}
+
+.navbar_fix_top{
+    top: 0;
+    border-width: 0 0 1px;
+}
+
+.navbar_fix_bottom, 
+.navbar_fix_top {
+    border-radius: 0;
+
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.navbar:after, 
+.navbar:before {
+    content: " ";
+    display: table;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+nav .width_limit {
+    min-width: 768px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+nav .logo{
+    float: left;
+    height: 56px;
+    padding: 10px 20px 15px 20px;
+}
+
+nav .logo img {
+    width: 139px;
+    height: 41px;
+}
+
+.invisiblebtn{
+    float: right;
+    width: 80px;
+    height: 40px;
+    line-height: 24px;
+    margin: 8px 15px 0;
+    border-radius: 20px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #ea6f5a;
+    background-color: transparent;
+}
+
+nav .sign_up {
+    float: right;
+    width: 80px;
+    height: 38px;
+    line-height: 24px;
+    margin: 9px 5px 0 15px;
+    border: 1px solid rgba(236,97,73,.7);
+    border-radius: 20px;
+    font-size: 15px;
+    color: #ea6f5a;
+    background-color: transparent;
+}
+
+nav .sign_up, nav .sign_up:hover {
+    transition: .1s ease-in;
+    -webkit-transition: .1s ease-in;
+    -moz-transition: .1s ease-in;
+    -o-transition: .1s ease-in;
+    -ms-transition: .1s ease-in;
+}
+
+nav .sign_in {
+    float: right;
+    margin: 11px 6px 0 10px;
+    font-size: 15px;
+}
+
+nav .sign_in, nav .sign_in:hover {
+    color: #969696;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+
+
+
