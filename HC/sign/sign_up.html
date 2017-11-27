@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
-	<title>PicShare Sign In</title>
-	<link rel="stylesheet" type="text/css" href="style/sign.css">
+	<title>PicShare Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="sign.css">
 </head>
+
 <body class="reader_song_font">
 	<div class="sign">
 		<div class="logo">
-			<a href="home.html">
-				<img src="image/picshare.png">
+			<a href="../home/home.html">
+				<img src="../image/picshare.png">
 			</a>
 		</div>
 
 		<div class="main">
 			<h4 class="title">
 				<div class="normal_title">
-					<a class="active" href="sign_in.html">登录</a>
+					<a href="sign_in.html">登录</a>
 					<b>·</b>
-					<a href="sign_up.html">注册</a>
+					<a class="active" href="sign_up.html">注册</a>
 				</div>
 			</h4>
 
-			<div class="sign_in_container">
+			<div class="sign_up_container">
 				<form accept-charset="utf-8" method="post">
-					<!-- 登录名输入框 -->
+					<!-- 昵称 -->
 					<div class="input_prepend restyle ">
-						<input placeholder="手机号或邮箱" type="text" name="session[email_or_mobile_number]" id="session_email_or_mobile_number" />
+						<input placeholder="你的昵称" type="text" name="" id="" />
 						<i class="iconfont ic_user"></i>
+					</div>
+
+					<!-- 手机号 -->
+					<div class="input_prepend restyle no_radius">
+						<input placeholder="手机号" type="tel" name="" id="" />
+						<i class="iconfont ic_phonenumber"></i>
 					</div>
 
 					<!-- 登录密码输入框 -->
@@ -40,8 +48,9 @@
 					<input type="submit" name="commit" value="登录" class="sign_in_button" data-disable-with="登录" />
 				</form>
 			</div>
-			
+
 		</div>
 	</div>
 </body>
+
 </html>
