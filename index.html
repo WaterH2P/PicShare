@@ -4,37 +4,33 @@
 <head>
 	<meta charset="utf-8">
 	<title>PicShare</title>
-	<link rel="stylesheet" type="text/css" href="./style/style.css">
-	<link rel="stylesheet" type="text/css" href="./style/index.css">
+	<link rel="stylesheet" type="text/css" href="./stylesheets/index.css">
 </head>
 
 <body>
 	<!-- 全局顶部导航栏 -->
-	<nav class="navbar navbar-default navbar-fix-top" role="navigation">
-		<div class="width-limit">
+    <!-- 标明为导航容器 -->
+    <nav class="nav_fix_top" role="navigation">
+        <div class="width-limit">
 			<!-- 左上方 logo -->
 			<a class="logo" target="_self" href="index.html">
-				<img src="./image/PicShare.png">
+				<img src="./images/PicShare.png">
 			</a>
 
 			<!-- 右上角 -->
 			<!-- 隐形块 -->
 			<div class="invisiblebtn"></div>
 			<!-- 未登录显示 登录/注册 -->
-			<a class="btn sign-up" href="./view/sign_up.html">注册</a>
-			<a class="btn sign-in" href="./view/sign_in.html">登录</a>
+			<a class="btn sign_up" href="./view/sign_up.html">注册</a>
+			<a class="btn sign_in" href="./view/sign_in.html">登录</a>
 
 			<div class="container">
-				<ul class="nav navbar-nav">
-					<li class="search">
-						<form target="_blank" action="" accept-charset="UTF-8" method="get">
-							<input name="utf8" type="hidden" />
-							<input type="text" autocomplete="off" placeholder="搜索" class="search-input" />
-							<a class="search-btn" href="javascript:void(null)">
-							</a>
-						</form>
-					</li>
-				</ul>
+                <form target="_blank" action="" accept-charset="UTF-8" method="get">
+                    <input name="utf8" type="hidden" />
+                    <input class="search_input" type="text" autocomplete="off" placeholder="搜索" />
+                    <a class="search_btn" href="javascript:void(null)">
+                    </a>
+                </form>
 			</div>
 
 		</div>
