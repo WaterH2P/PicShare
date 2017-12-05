@@ -22,11 +22,11 @@ router.route('/signUp')
         res.render('signUp', {title: 'Express'});
     })
     .post(function (req, res) {
-        var upassword = req.body.upassword;
-        var uname = req.body.uname;
-        var uemail = req.body.uemail;
+        var upassword = req.body.userPassword;
+        var uname = req.body.userName;
+        var uemail = req.body.userEmail;
         var uid = signUp(upassword, uname, uemail);
-        res.render('tellID', {title: uid-IDDistance});
+        res.send({status:true, uid:uid});
     });
 
 module.exports = router;

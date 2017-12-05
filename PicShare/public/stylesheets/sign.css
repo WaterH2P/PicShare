@@ -22,26 +22,12 @@ a {
     text-decoration: none;
 }
 
-h4 {
-	font-size: 18px;
-	line-height: 1.1;
-
-	display: block;
-    -webkit-margin-before: 1.33em;
-    -webkit-margin-after: 1.33em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    font-weight: bold;
-}
-
 form {
 	display: block;
     margin: 0 0 20px;
 }
 
 input{
-    font-family: inherit;
-    font-size: inherit;
     line-height: inherit;
 
     font: inherit;
@@ -124,12 +110,8 @@ input{
     margin-bottom: 30px;
 }
 
-.sign form .input_prepend{
+.sign form .input_prepend {
 	position: relative;
-    width: 100%;
-}
-
-.sign form .input_prepend input {
     width: 100%;
     height: 50px;
     padding: 4px 12px 4px 35px;
@@ -139,17 +121,17 @@ input{
     vertical-align: middle;
 }
 
-.sign form .input_up_prepend input{
+.sign form .input_up_prepend {
 	border-bottom: none;
 	border-radius: 4px 4px 0 0;
 }
 
-.sign form .input_middle_prepend input {
+.sign form .input_middle_prepend {
 	border-radius: 0;
 	border-bottom: none;
 }
 
-.sign form .input_down_prepend input {
+.sign form .input_down_prepend {
     margin-bottom: 30px;
 }
 

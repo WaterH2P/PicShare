@@ -18,40 +18,40 @@
 
 		<div class="main">
 			<h4 class="title">
-				<div>
+				<div id="aSignUp">
 					<a href="signIn">登录</a>
 					<b>·</b>
 					<a class="active" href="signUp">注册</a>
 				</div>
+                <div id="aShowID" style="display: none">
+                    <a class="active">你的帐号</a>
+                </div>
 			</h4>
 
 			<div class="sign_up_container">
-				<form role="form" accept-charset="utf-8" method="post">
+				<form role="form" id="signUpForm" accept-charset="utf-8" method="post" onsubmit="return false">
 					<!-- 昵称 -->
-					<div class="input_prepend input_up_prepend ">
-						<input placeholder="请输入昵称" type="text" name="userName" id="userName" required/>
-						<i class="iconfont ic_user"></i>
-					</div>
+                    <input class="input_prepend input_up_prepend" placeholder="请输入昵称"
+                           type="text" name="userName" id="userName" required/>
 
 					<!-- 手机号 -->
-					<div class="input_prepend input_middle_prepend">
-						<input placeholder="请输入邮箱" type="email" name="userEmail" id="userEmail" required/>
-						<i class="iconfont ic_phonenumber"></i>
-					</div>
+                    <input class="input_prepend input_middle_prepend" placeholder="请输入邮箱"
+                           type="email" name="userEmail" id="userEmail" required/>
 
 					<!-- 登录密码输入框 -->
-					<div class="input_prepend input_middle_prepend">
-						<input placeholder="请输入密码" type="password" name="userPassword" id="userPassword" required/>
-						<i class="iconfont ic_password"></i>
-					</div>
-                    <div class="input_prepend input_down_prepend">
-                        <input placeholder="请再次输入密码" type="password" name="userPasswordAgain" id="userPasswordAgain" required/>
-                        <i class="iconfont ic_password"></i>
-                    </div>
+                    <input class="input_prepend input_middle_prepend" placeholder="请输入密码"
+                           type="password" name="userPassword" id="userPassword" required/>
+                    <input class="input_prepend input_down_prepend" placeholder="请再次输入密码"
+                           type="password" name="userPasswordAgain" id="userPasswordAgain" required/>
 
 					<!-- 注册 -->
 					<input type="submit" id="signUpSubmit" name="signUpSubmit" value="注册" class="sign_button" />
 				</form>
+                <form action="signIn" id="showIDForm" accept-charset="utf-8" method="get" style="display: none">
+                    <input class="input_prepend" style="margin-bottom: 50px;padding: 0;text-align: center;"
+                           type="text" id="userIDShow" readonly />
+                    <input type="submit" id="goToSignIn" value="已铭记账号" class="sign_button"/>
+                </form>
 			</div>
 		</div>
 	</div>
@@ -73,8 +73,16 @@
                     var userEmail = $("#userEmail").val().toString();
                     var passwordHash = md5(userPassword);
 
-                    var data = {"uname":userName, "uemail":userEmail, "upassword":passwordHash};
-                    $.post('signUp', data);
+                    var data = {"userName":userName, "userEmail":userEmail, "userPassword":passwordHash};
+                    $.post('signUp', data, function (data) {
+                        if( data.status ){
+                            $("#aSignUp").hide();
+                            $("#signUpForm").hide();
+                            $("#aShowID").show();
+                            $("#showIDForm").show();
+                            $("#userIDShow").val(data.uid);
+                        }
+                    });
                 }
             });
         });

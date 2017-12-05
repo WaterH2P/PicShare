@@ -6,7 +6,7 @@ var sqlite = require('sqlite3').verbose();
 
 var userTable = 'user';
 
-var db = new sqlite.Database( 'PicShare.db' );
+var db = new sqlite.Database( path.join(__dirname, 'PicShare.db') );
 
 exports.addUser = function (uid, upassword, uname, uemail) {
     var stmt = db.prepare("INSERT INTO " + userTable + " VALUES(?,?,?,?)");
