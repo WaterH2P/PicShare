@@ -1,0 +1,219 @@
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+    min-width: 768px;
+    font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+    font-size: 17px;
+    margin: 0;
+}
+
+div {
+    display: block;
+}
+
+a {
+    cursor: pointer;
+    background-color: transparent;
+    color: #337ab7;
+    text-decoration: none;
+}
+
+a:active, a:hover {
+    outline: 0
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 导航栏 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+.nav_fix_top {
+    position: fixed;
+    top: 0;
+    border-radius: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+
+    height: 56px;
+    min-height: 50px;
+    display: block;
+
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+
+    background-color: #f8f8f8;
+}
+.nav_fix_top:before {
+    content: " ";
+    display: table;
+}
+.nav_fix_top:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+nav .width-limit {
+    min-width: 768px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+nav .logo {
+    float: left;
+    height: 42px;
+    padding: 6px 10px 10px 15px;
+}
+nav .logo img {
+    width: 154px;
+    height: 42px;
+}
+
+nav .invisiblebtn {
+    float: right;
+    width: 80px;
+    height: 40px;
+    line-height: 24px;
+    margin: 8px 15px 0;
+    border-radius: 20px;
+    font-size: 15px;
+    color: #fff;
+    background-color: transparent;
+}
+
+nav .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+nav .sign_up {
+    float: right;
+    width: 80px;
+    height: 38px;
+    line-height: 24px;
+    margin: 9px 5px 0 15px;
+    border: 1px solid rgba(236, 97, 73, .7);
+    border-radius: 20px;
+    font-size: 15px;
+    color: #ea6f5a;
+    background-color: transparent;
+}
+nav .sign_up:hover {
+    -moz-box-shadow: #666 0 0 5px;
+    -webkit-box-shadow: #666 0 0 5px;
+    box-shadow: #666 0 0 5px;
+}
+
+nav .sign_in {
+    float: right;
+    margin: 11px 6px 0 10px;
+    font-size: 15px;
+    color: #969696;
+}
+nav .sign_in:hover {
+    color: #2b2e96;
+}
+
+nav .container {
+    float: left;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 15px;
+    padding-right: 15px
+}
+nav .container:before {
+    content: " ";
+    display: table;
+}
+nav .container:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+nav form {
+    position: relative;
+    top: 6px;
+}
+
+nav form .search_input {
+    padding: 0 40px 0 20px;
+    width: 180px;
+    height: 40px;
+    font-size: 14px;
+    border: 1px solid #eee;
+    border-radius: 40px;
+    background: #eee;
+    transition: width .5s;
+    -moz-transition: width .5s;
+    -webkit-transition: width .5s;
+    -o-transition: width .5s;
+    transition-delay: .1s;
+    -moz-transition-delay: .1s;
+    -webkit-transition-delay: .1s;
+    -o-transition-delay: .1s
+}
+
+nav form .search_input:hover{
+    background: #f5f5f5;
+    -moz-box-shadow: #666 0 0 0 2px;
+    -webkit-box-shadow: #666 0 0 2px;
+    box-shadow: #666 0 0 2px;
+}
+
+nav form .search_input:focus {
+    transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    width: 240px;
+    outline: none;
+    visibility: visible;
+    opacity: 1;
+
+    background: #f5f5f5;
+    -moz-box-shadow: #666 0 0 0 2px;
+    -webkit-box-shadow: #666 0 0 2px;
+    box-shadow: #666 0 0 2px;
+}
+
+nav form .search_input:focus+.search_btn {
+    background-color: #969696;
+    border-radius: 50%;
+    color: #fff !important
+}
+
+nav form .search_btn {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    width: 30px;
+    height: 30px !important;
+    line-height: normal !important;
+    padding: 0 !important;
+    color: #969696 !important;
+    text-align: center
+}
+/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 导航栏 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */

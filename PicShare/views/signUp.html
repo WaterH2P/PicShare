@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>PicShare Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/sign.css">
+</head>
+
+<body>
+	<div class="sign">
+		<div class="logo">
+			<!-- 返回主页 -->
+			<a href="index">
+				<img src="images/PicShare.png">
+			</a>
+		</div>
+
+		<div class="main">
+			<h4 class="title">
+				<div>
+					<a href="signIn">登录</a>
+					<b>·</b>
+					<a class="active" href="signUp">注册</a>
+				</div>
+			</h4>
+
+			<div class="sign_up_container">
+				<form role="form" accept-charset="utf-8" method="post">
+					<!-- 昵称 -->
+					<div class="input_prepend input_up_prepend ">
+						<input placeholder="请输入昵称" type="text" name="userName" id="userName" required/>
+						<i class="iconfont ic_user"></i>
+					</div>
+
+					<!-- 手机号 -->
+					<div class="input_prepend input_middle_prepend">
+						<input placeholder="请输入邮箱" type="email" name="userEmail" id="userEmail" required/>
+						<i class="iconfont ic_phonenumber"></i>
+					</div>
+
+					<!-- 登录密码输入框 -->
+					<div class="input_prepend input_middle_prepend">
+						<input placeholder="请输入密码" type="password" name="userPassword" id="userPassword" required/>
+						<i class="iconfont ic_password"></i>
+					</div>
+                    <div class="input_prepend input_down_prepend">
+                        <input placeholder="请再次输入密码" type="password" name="userPasswordAgain" id="userPasswordAgain" required/>
+                        <i class="iconfont ic_password"></i>
+                    </div>
+
+					<!-- 注册 -->
+					<input type="submit" id="signUpSubmit" name="signUpSubmit" value="注册" class="sign_button" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="javascripts/jquery-3.2.1.js"></script>
+    <script>
+        $(function () {
+            $("#signUpSubmit").click(function () {
+                var userPassword = $("#userPassword").val().toString();
+                var userPasswordAgain = $("#userPasswordAgain").val().toString();
+                if( (userPassword.length===0) ||(userPassword !== userPasswordAgain) ){
+                    $("#userPassword").css("border","1px solid red");
+                    $("#userPasswordAgain").css("border","1px solid red");
+                }
+                else if( userPassword === userPasswordAgain ){
+                    var userName = $("#userName").val().toString();
+                    var userEmail = $("#userEmail").val().toString();
+                    var passwordHash = md5(userPassword);
+
+                    var data = {"uname":userName, "uemail":userEmail, "upassword":passwordHash};
+                    $.post('signUp', data);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
