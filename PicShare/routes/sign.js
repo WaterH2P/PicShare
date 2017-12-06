@@ -7,26 +7,43 @@ var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 
+var crypto = require('crypto');
 var sqlite = require('../database/sqlite3');
 
+var md5 = crypto.createHash('md5');
 var IDDistance = 5;
 
 /* GET sign page. */
 
-router.get('/signIn', function(req, res, next) {
-    res.render('signIn', {title: 'Express'});
-});
+router.route('/signIn')
+    .get(function(req, res) {
+        res.render('signIn');
+    })
+    .post(function (req, res) {
+        var userID = req.body.userID;
+        var userPassword = req.body.userPassword;
+        if( signIn(userID, userPassword) ){
+            var identification = "" + userID + new Date().getTime() + userPassword;
+            req.session.logged_in = true;
+            req.session.user = identification;
+            userOnline[req.session.user] = userID;
+            res.send({status:true});
+        }
+        else{
+            res.send({status:false});
+        }
+    });
 
 router.route('/signUp')
     .get(function(req, res) {
-        res.render('signUp', {title: 'Express'});
+        res.render('signUp');
     })
     .post(function (req, res) {
-        var upassword = req.body.userPassword;
-        var uname = req.body.userName;
-        var uemail = req.body.userEmail;
-        var uid = signUp(upassword, uname, uemail);
-        res.send({status:true, uid:uid});
+        var userPassword = req.body.userPassword;
+        var userName = req.body.userName;
+        var userEmail = req.body.userEmail;
+        var userID = signUp(userPassword, userName, userEmail);
+        res.send({status:true, userID:userID});
     });
 
 module.exports = router;
@@ -35,22 +52,49 @@ module.exports = router;
 /* ============================================== 内部函数 ============================================== */
 
 
-function signUp(upassword, uname, uemail) {
-    var uid = undefined;
+var signUp = function(userPassword, userName, userEmail) {
+    var userID = undefined;
     try {
         var IDs = fs.readFileSync(path.join(__dirname, './ID.txt'), 'utf8');
         IDs = IDs.split(';');
-        var uid = IDs.length * IDDistance + 3432;
-        if( upassword!==undefined || upassword.length!==0 ) {
-            fs.appendFile(path.join(__dirname, './ID.txt'), uid + "," + upassword + ";\n", function (err) {
+        userID = IDs.length * IDDistance + 3432;
+        if( userPassword!==undefined || userPassword.length!==0 ) {
+            fs.appendFile(path.join(__dirname, './ID.txt'), userID + "," + userPassword + ";\n", function (err) {
                 if (err) {
                     util.log("write id wrong");
                 }
             });
-            sqlite.addUser(uid, upassword, uname, uemail);
+            sqlite.addUser(userID, userPassword, userName, userEmail);
         }
     }catch(err){
-        util.log("read file wrong");
+        util.log("sign up read file wrong");
     }
-    return uid;
-}
+    return userID;
+};
+
+var signIn = function(userID, userPassword) {
+    try{
+        var IDs = fs.readFileSync(path.join(__dirname, './ID.txt'), 'utf8');
+        IDs = IDs.split(';\n');
+        for( var i=0; i<IDs.length; i++ ){
+            var IDAndPassword = IDs[i].split(",");
+            if( IDAndPassword[0].length>0 && IDAndPassword[1].length>0 && IDAndPassword[0]===userID && IDAndPassword[1]===userPassword ){
+                fs.appendFile(path.join(__dirname, './log.txt'), userID + " sign in at " + new Date().getTime() + "\n", 'utf8', function (err) {
+                    if (err) {
+                        util.log("write sign in log wrong");
+                    }
+                });
+                return true;
+            }
+        }
+        return false;
+    }catch(err){
+        util.log("sign in read file wrong");
+        fs.appendFile(path.join(__dirname, './log.txt'), userID + " fail to sign in at " + new Date().getTime() + "\n", 'utf8', function (err) {
+            if (err) {
+                util.log("write fail to sign in log wrong");
+            }
+        });
+        return false;
+    }
+};

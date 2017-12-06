@@ -47,6 +47,7 @@ a:active, a:hover {
 
     margin-bottom: 20px;
     border: 1px solid transparent;
+    border-bottom-color: #00B7FF;
 
     background-color: #f8f8f8;
 }
@@ -108,19 +109,46 @@ nav .btn {
     user-select: none;
 }
 
-nav .sign_up {
+nav .userLogoLink{
+    float: right;
+    height: 54px;
+    width: 80px;
+    text-align: center;
+    background: transparent;
+}
+
+nav .userLogoLink:hover{
+    background: #ececec;
+}
+
+
+nav .userLogo{
+    vertical-align: middle;
+    height: 44px;
+    width: 44px;
+    margin: 5px 0;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #969696;
+    -moz-border-radius: 22px;
+    -webkit-border-radius: 22px;
+}
+
+nav .logout {
     float: right;
     width: 80px;
     height: 38px;
     line-height: 24px;
     margin: 9px 5px 0 15px;
-    border: 1px solid rgba(236, 97, 73, .7);
+    border: 1px solid #666;
     border-radius: 20px;
     font-size: 15px;
-    color: #ea6f5a;
+    color: #666;
     background-color: transparent;
 }
-nav .sign_up:hover {
+nav .logout:hover {
+    border: 1px solid rgba(236, 97, 73, .7);
+    color: #ea6f5a;
     -moz-box-shadow: #666 0 0 5px;
     -webkit-box-shadow: #666 0 0 5px;
     box-shadow: #666 0 0 5px;
@@ -200,7 +228,7 @@ nav form .search_input:focus {
 }
 
 nav form .search_input:focus+.search_btn {
-    background-color: #969696;
+    background-color: #a7a7a7;
     border-radius: 50%;
     color: #fff !important
 }
@@ -213,7 +241,7 @@ nav form .search_btn {
     height: 30px !important;
     line-height: normal !important;
     padding: 0 !important;
-    color: #969696 !important;
+    color: #a7a7a7 !important;
     text-align: center
 }
 /* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 导航栏 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */

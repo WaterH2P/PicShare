@@ -18,26 +18,36 @@
 
 		<div class="main">
 			<h4 class="title">
-				<div>
+				<div id="aSign">
 					<a class="active" href="signIn">登录</a>
 					<b>·</b>
 					<a href="signUp">注册</a>
 				</div>
+                <div id="aShowStatus" style="display: none">
+                    <a class="active">登陆情况</a>
+                </div>
 			</h4>
 
-			<div class="sign_in_container">
-				<form role="form" accept-charset="utf-8" method="post">
+			<div>
+				<form role="form" id="signInForm" accept-charset="utf-8" method="post" onsubmit="return false">
 					<!-- 登录名输入框 -->
                     <input class="input_prepend input_up_prepend" placeholder="帐号"
-                               type="text" name="userName" id="userName" required />
+                           type="text" name="userID" id="userID" required/>
 
 					<!-- 登录密码输入框 -->
                     <input class="input_prepend input_down_prepend" placeholder="密码"
-                               type="password" name="userPassword" id="userPasswrod" required />
+                           type="password" name="userPassword" id="userPassword" required/>
 
 					<!-- 登录 -->
 					<input type="submit" id="signInSubmit" name="signInSubmit" value="登录" class="sign_button" />
 				</form>
+                <div id="showStatusDiv" style="display: none">
+                    <input class="input_prepend" style="margin-bottom: 50px;padding: 0;text-align: center;"
+                           type="text" id="signInStatusShow" readonly />
+                    <a href="index" id="goToIndex">
+                        <input type="submit" id="goToIndexBtn" class="sign_button"/>
+                    </a>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -47,13 +57,50 @@
 	<script src="javascripts/jquery-3.2.1.js"></script>
 	<script>
         $(function () {
-            $("#signUpSubmit").click(function () {
-				var userName = $("#userName").val().toString();
-				var userPassword = $("#userPassword").val().toString();
-				var passwordHash = md5(userPassword);
+            $("#signInSubmit").click(function () {
+                var IDReady = true;
+                var passwordReady = true;
 
-				var data = {"uname":userName, "upassword":passwordHash};
-				$.post('signUp', data);
+				var userID = $("#userID").val().toString();
+				var userPassword = $("#userPassword").val().toString();
+
+				if( userID===undefined || userID.length===0 ){
+				    $("#userID").css("border","1px solid red");
+                    IDReady = false;
+                }
+                else {
+                    $("#userID").css("border","1px solid #c8c8c8");
+                    IDReady = true;
+                }
+                if( userPassword===undefined || userPassword.length===0 ){
+                    $("#userPassword").css("border","1px solid red");
+                    passwordReady = false;
+                }
+                else {
+                    $("#userPassword").css("border","1px solid #c8c8c8");
+                    passwordReady = true;
+                }
+                if( IDReady && passwordReady ) {
+                    var passwordHash = md5(userPassword);
+
+                    var data = {"userID": userID, "userPassword": passwordHash};
+                    $.post('signIn', data, function (res) {
+                        $("#aSign").hide();
+                        $("#signInForm").hide();
+                        $("#aShowStatus").show();
+                        $("#showStatusDiv").show();
+                        if (res.status) {
+                            $("#signInStatusShow").val("恭喜登陆成功");
+                            $("#goToIndexBtn").val("开启探索之旅");
+                            $("#goToIndex").attr("href", "index");
+                        }
+                        else {
+                            $("#signInStatusShow").val("登陆失败");
+                            $("#goToIndexBtn").val("重新登陆");
+                            $("#goToIndex").attr("href", "signIn");
+                        }
+                    });
+                }
             });
         });
 	</script>

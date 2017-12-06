@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <meta http-equiv="Page-Enter" content= "revealTrans(Duration=5.0,Transition=11)">
+    <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/profile.css">
+</head>
+<body>
+    <!-- 全局顶部导航栏 -->
+    <!-- 标明为导航容器 -->
+    <nav class="nav_fix_top" role="navigation">
+        <div class="width-limit">
+            <!-- 左上方 logo -->
+            <a class="logo" target="_self" href="index">
+                <img src="images/PicShare.png" title="主页">
+            </a>
+
+            <!-- 右上角 -->
+            <!-- 注销 -->
+            <a class="btn logout" href="/logout">注销</a>
+            <!-- 隐形块 -->
+            <div class="invisiblebtn"></div>
+            <a class="userLogoLink" id="userLogoLink" href="javascript:void(null)">
+                <img class="userLogo" id="userLogo" title="个人信息">
+            </a>
+            <!--<a class="btn sign_in" href="/signIn">登录</a>-->
+
+            <div class="container">
+                <form target="_blank" action="" accept-charset="UTF-8" method="get">
+                    <input name="utf8" type="hidden" />
+                    <input class="search_input" id="searchInput" type="text" autocomplete="off" placeholder="搜索" />
+                    <a class="search_btn" id="searchLogo" style="display: none" href="javascript:void(null)">
+                        <img src="images/searchLogo.png" width="28px" height="28px">
+                    </a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ----------------------- 导航栏以下 ----------------------- -->
+
+    <div class="div_log_fix">
+        <img class="userBigLogo" id="userBigLogo" src="">
+        <input type="file" id="uploadFileBtn" style="display: none">
+        <button class="changeLogoBtn" id="changeLogoBtn">更改头像</button>
+        <div style="display: inline-block">
+
+        </div>
+    </div>
+
+    <div class="profile_page">
+        <div class="main">
+            <div class="info_frag">
+                <label class="info_common info_label">账号</label>
+                <input type="text" class="info_common" id="userID" readonly>
+            </div>
+            <div class="info_frag">
+                <label class="info_common info_label">昵称</label>
+                <input type="text" class="info_common" id="userName" maxlength="18" readonly>
+            </div>
+            <div class="info_frag">
+                <label class="info_common info_label">邮箱</label>
+                <input type="email" class="info_common" id="userEmail"  maxlength="18" readonly>
+            </div>
+            <div class="info_frag" id="changeInfoDiv">
+                <button class="changeInfoBtn" id="changeInfoBtn">修改信息</button>
+                <input type="text" class="info_common" style="visibility: hidden" readonly>
+            </div>
+            <div class="q" id="submitInfoDiv" style="display:none">
+                <button class="submitInfoBtn" id="submitInfoBtn">提交修改</button>
+                <input type="text" class="info_common" style="visibility: hidden" readonly>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="javascripts/jquery-3.2.1.js"></script>
+    <script>
+        $(function () {
+            $.get('userInfo', function (data) {
+                if( data ){
+                    $("#userLogo").attr("src", data.userLogo);
+                    $("#userBigLogo").attr("src", data.userLogo);
+                    $("#userID").val(data.userID);
+                    $("#userName").val(data.userName);
+                    $("#userEmail").val(data.userEmail);
+                }
+                else {
+                    $.post('logout');
+                }
+            });
+            $("#changeLogoBtn").click(function () {
+                $("#uploadFileBtn").click();
+            })
+            $("#changeInfoBtn").click(function () {
+                $("#userName").removeAttr("readonly");
+                $("#userEmail").removeAttr("readonly");
+                $("#userName").removeAttr("readonly");
+
+            })
+        });
+    </script>
+</body>
+</html>

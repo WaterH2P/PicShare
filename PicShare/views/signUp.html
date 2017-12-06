@@ -18,7 +18,7 @@
 
 		<div class="main">
 			<h4 class="title">
-				<div id="aSignUp">
+				<div id="aSign">
 					<a href="signIn">登录</a>
 					<b>·</b>
 					<a class="active" href="signUp">注册</a>
@@ -28,7 +28,7 @@
                 </div>
 			</h4>
 
-			<div class="sign_up_container">
+			<div>
 				<form role="form" id="signUpForm" accept-charset="utf-8" method="post" onsubmit="return false">
 					<!-- 昵称 -->
                     <input class="input_prepend input_up_prepend" placeholder="请输入昵称"
@@ -45,13 +45,15 @@
                            type="password" name="userPasswordAgain" id="userPasswordAgain" required/>
 
 					<!-- 注册 -->
-					<input type="submit" id="signUpSubmit" name="signUpSubmit" value="注册" class="sign_button" />
+					<input class="sign_button" type="submit" id="signUpSubmit" name="signUpSubmit" value="注册"/>
 				</form>
-                <form action="signIn" id="showIDForm" accept-charset="utf-8" method="get" style="display: none">
+                <div id="showIDDiv" style="display: none">
                     <input class="input_prepend" style="margin-bottom: 50px;padding: 0;text-align: center;"
                            type="text" id="userIDShow" readonly />
-                    <input type="submit" id="goToSignIn" value="已铭记账号" class="sign_button"/>
-                </form>
+                    <a href="signIn">
+                        <input type="submit" id="goToSignIn" value="已铭记账号" class="sign_button"/>
+                    </a>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -62,25 +64,54 @@
     <script>
         $(function () {
             $("#signUpSubmit").click(function () {
+                var nameReady = true;
+                var emailReady = true;
+                var passwordReady = true;
+
+                var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+.([a-z])+$/;
+                var userName = $("#userName").val().toString();
+                var userEmail = $("#userEmail").val().toString();
                 var userPassword = $("#userPassword").val().toString();
                 var userPasswordAgain = $("#userPasswordAgain").val().toString();
+
+                if( userName===undefined || userName.length===0 ){
+                    $("#userName").css("border","1px solid red");
+                    nameReady = false;
+                }
+                else {
+                    $("#userName").css("border","1px solid #c8c8c8");
+                    nameReady = true;
+                }
+                if( userEmail===undefined || userEmail.length===0 || !emailReg.test(userEmail) ){
+                    $("#userEmail").css("border","1px solid red");
+                    emailReady = false;
+                }
+                else {
+                    $("#userEmail").css("border","1px solid #c8c8c8");
+                    emailReady = true;
+                }
                 if( (userPassword.length===0) ||(userPassword !== userPasswordAgain) ){
                     $("#userPassword").css("border","1px solid red");
                     $("#userPasswordAgain").css("border","1px solid red");
+                    passwordReady = false;
                 }
-                else if( userPassword === userPasswordAgain ){
-                    var userName = $("#userName").val().toString();
-                    var userEmail = $("#userEmail").val().toString();
+                else {
+                    $("#userPassword").css("border","1px solid #c8c8c8");
+                    $("#userPasswordAgain").css("border","1px solid #c8c8c8");
+                    passwordReady = true;
+                }
+                if( passwordReady && emailReady && nameReady ){
+
                     var passwordHash = md5(userPassword);
 
                     var data = {"userName":userName, "userEmail":userEmail, "userPassword":passwordHash};
-                    $.post('signUp', data, function (data) {
-                        if( data.status ){
-                            $("#aSignUp").hide();
+                    $.post('signUp', data, function (res) {
+                        if( res.status ){
+                            $("#aSign").hide();
                             $("#signUpForm").hide();
                             $("#aShowID").show();
-                            $("#showIDForm").show();
-                            $("#userIDShow").val(data.uid);
+                            $("#showIDDiv").show();
+                            $("#userIDShow").val(res.userID);
                         }
                     });
                 }

@@ -12,6 +12,7 @@ var sign = require('./routes/sign');
 
 var ejs = require('ejs');
 var app = express();
+global.userOnline = {};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,10 +26,34 @@ app.use( logger('dev') );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({ extended: false }) );
 app.use( cookieParser() );
+app.use( session({
+    resave: true, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+    secret: 'PicShare'
+}) );
 app.use( express.static(path.join(__dirname, 'public')) );
 
+app.use( function (req, res, next) {
+    if( !req.session.logged_in ){
+        if( req.url==='/signIn' || req.url==='/signUp' ){
+            next();
+        }
+        else {
+            res.redirect('/signIn');
+        }
+    }
+    else if( req.session.user ){
+        next();
+    }
+});
 app.use( '/', index );
 app.use( '/', sign );
+app.use( '/logout', function (req, res) {
+    delete userOnline[req.session.user];
+    req.session.logged_in = false;
+    req.session.user = null;
+    res.redirect('/signIn');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

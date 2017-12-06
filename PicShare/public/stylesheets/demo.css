@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/*css3实现照片墙的样式*/
+.demoContainer {
+    top: 70px;
+    width: 960px;
+    height: 450px;
+    margin: 60px auto;
+    position: relative;
+}
+
+.demoContainer img {
+    position: absolute;
+    padding: 10px 10px 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+    z-index: 1;
+}
+
+.demoContainer img:hover {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-box-shadow: 5px 5px 5px #ddd;
+    -moz-box-shadow: 5px 5px 5px #ddd;
+    box-shadow: 5px 5px 5px #ddd;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.pic1 {
+    top: 0px;
+    left: 400px;
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+
+.pic2 {
+    top: 0px;
+    left: 600px;
+    -webkit-transform: rotate(-20deg);
+    -moz-transform: rotate(-20deg);
+    transform: rotate(-20deg);
+}
+
+.pic3 {
+    bottom: 0;
+    right: 0;
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+
+.pic4 {
+    bottom: 0;
+    left: 300px;
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+}
+
+.pic5 {
+    bottom: 0;
+    left: 0;
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+}
+
+.pic6 {
+    top: 0;
+    left: 0;
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    transform: rotate(10deg);
+}
+
+.pic7 {
+    top: 0;
+    left: 850px;
+    -webkit-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    transform: rotate(20deg);
+}
+
+.pic8 {
+    bottom: -20px;
+    right: 630px;
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+
+.pic9 {
+    top: 90px;
+    left: 550px;
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    transform: rotate(15deg);
+}
+
+.pic10 {
+    left: 180px;
+    top: 20px;
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+}
