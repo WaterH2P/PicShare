@@ -6,6 +6,7 @@
     <meta http-equiv="Page-Enter" content= "revealTrans(Duration=5.0,Transition=11)">
     <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/profile.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
 </head>
 <body>
     <!-- 全局顶部导航栏 -->
@@ -68,15 +69,16 @@
                 <button class="changeInfoBtn" id="changeInfoBtn">修改信息</button>
                 <input type="text" class="info_common" style="visibility: hidden" readonly>
             </div>
-            <div class="q" id="submitInfoDiv" style="display:none">
+            <div class="info_frag" id="submitInfoDiv" style="display:none">
                 <button class="submitInfoBtn" id="submitInfoBtn">提交修改</button>
                 <input type="text" class="info_common" style="visibility: hidden" readonly>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>-->
     <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="javascripts/md5.min.js"></script>
     <script src="javascripts/jquery-3.2.1.js"></script>
     <script>
         $(function () {
@@ -98,7 +100,18 @@
             $("#changeInfoBtn").click(function () {
                 $("#userName").removeAttr("readonly");
                 $("#userEmail").removeAttr("readonly");
-                $("#userName").removeAttr("readonly");
+                $("#userName").css("border", "2px solid #55E9FF")
+                $("#userEmail").css("border", "2px solid #55E9FF")
+                $("#changeInfoDiv").hide();
+                $("#submitInfoDiv").show();
+            })
+            $("#submitInfoBtn").click(function () {
+                $("#userName").attr("readonly", "readonly");
+                $("#userEmail").attr("readonly", "readonly");
+                $("#userName").css("border","1px solid #c8c8c8");
+                $("#userEmail").css("border","1px solid #c8c8c8");
+                $("#changeInfoDiv").show();
+                $("#submitInfoDiv").hide();
 
             })
         });

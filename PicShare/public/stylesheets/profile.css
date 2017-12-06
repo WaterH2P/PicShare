@@ -162,11 +162,11 @@ input{
 }
 
 .profile_page .main .submitInfoBtn{
-    border: 1px solid #05ffcb;
+    border: 1px solid #2aff00;
     color: #fff;
-    background: #05ffcb;
+    background: #2aff00;
 }
 
 .profile_page .main .submitInfoBtn:hover{
-    background: #0affa4;
+    background: #11ff00;
 }
