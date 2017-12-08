@@ -11,19 +11,59 @@ router.route('/')
         res.render('index');
 });
 
-router.route('/index')
+router.route('/indexFind')
     .get(function(req, res, next) {
-        res.render('index');
+        res.render('index/indexFind');
 });
+
+router.route('/indexMine')
+    .get(function(req, res, next) {
+        res.render('index/indexMine');
+    });
 
 router.route('/userLogo')
     .get(function (req, res, next) {
-        var uid = userOnline[req.session.user];
-        sqlite.searchUserLogo(uid, function(data) {
+        var userID = userOnline[req.session.user];
+        sqlite.searchUserLogo(userID, function(data) {
             util.log("logic get logo path : " + data.userLogo);
             res.send( data );
         });
 });
+
+router.route('/hotImages')
+    .get(function (req, res, next) {
+        sqlite.findHotImages(function (data) {
+            // util.log( " logic imagePaths : " + data);
+            res.send( data );
+        })
+    });
+
+router.route('/myImages')
+    .get(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        sqlite.findMyImages(userID, function (data) {
+            res.send( data );
+        })
+    });
+
+// router.route('/uploadImg')
+//     .get(function (req, res, next) {
+//         res.render('index/uploadImg');
+//     });
+
+router.route('/uploadImg')
+    .get(function (req, res, next) {
+        res.render('uploadImg');
+    });
+
+router.route('/searchImage')
+    .post(function (req, res, next) {
+        var keyWord = req.body.keyWord;
+        sqlite.searchImages(keyWord, function (data) {
+            util.log(data);
+            res.send( data );
+        })
+    });
 
 router.route('/profile')
     .get(function (req, res, next) {
@@ -32,10 +72,20 @@ router.route('/profile')
 
 router.route('/userInfo')
     .get(function (req, res, next) {
-        var uid = userOnline[req.session.user];
-        sqlite.searchUserInfo(uid, function(data) {
+        var userID = userOnline[req.session.user];
+        sqlite.searchUserInfo(userID, function(data) {
             res.send( data );
         });
     });
+
+router.route('/changeInfo')
+    .post(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        var userName = req.body.userName;
+        var userEmail = req.body.userEmail;
+        sqlite.changeUserInfo(userID, userName, userEmail, function (status) {
+            res.send( {status:status} );
+        })
+});
 
 module.exports = router;

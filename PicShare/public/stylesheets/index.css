@@ -30,6 +30,12 @@ a:active, a:hover {
     box-sizing: border-box;
 }
 
+img{
+    border: 0;
+}
+
+
+
 
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 导航栏 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 
@@ -164,18 +170,54 @@ nav .sign_in:hover {
     color: #2b2e96;
 }
 
-nav .container {
+nav .div_frag_container{
+    float: left;
+    width: auto;
+    height: 54px;
+    align-items: center;
+    margin: 0 20px 0 20px;
+}
+
+nav .frag{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    font-size: 18px;
+    width: 80px;
+    height: 54px;
+    line-height: 54px;
+    color: #666;
+    background-color: transparent;
+}
+
+nav .fragActive{
+    color: #00B7FF;
+}
+
+nav .fragUnactive:hover{
+    background-color: #dddddd;
+}
+
+nav .div_search_container {
+    display: inline-block;
     float: left;
     margin-right: 0px;
     margin-left: 0px;
     padding-left: 15px;
     padding-right: 15px
 }
-nav .container:before {
+nav .div_search_container:before {
     content: " ";
     display: table;
 }
-nav .container:after {
+nav .div_search_container:after {
     content: " ";
     display: table;
     clear: both;
@@ -227,12 +269,6 @@ nav form .search_input:focus {
     box-shadow: #666 0 0 2px;
 }
 
-nav form .search_input:focus+.search_btn {
-    background-color: #a7a7a7;
-    border-radius: 50%;
-    color: #fff !important
-}
-
 nav form .search_btn {
     position: absolute;
     top: 4px;
@@ -242,6 +278,89 @@ nav form .search_btn {
     line-height: normal !important;
     padding: 0 !important;
     color: #a7a7a7 !important;
-    text-align: center
+    text-align: center;
+    cursor: pointer;
+    background-color: #a7a7a7;
+    border-radius: 50%;
 }
-/* ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 导航栏 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ */
+
+
+
+
+
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 图片区 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+.imgContainer{
+    margin-top: 60px;
+    text-align: center;
+}
+
+.imageBox {
+    /*width: 496px;*/
+    width: 1045px;
+    margin: 30px auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px #ddd;
+    padding: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.imageBox .imgList {
+    width: 300px;
+    height: 180px;
+    padding: 5px;
+    margin: 20px;
+    border: 1px solid #dedede;
+    box-shadow: 0 0 5px #dedede;
+    overflow: hidden;
+    float: left;
+    filter: alpha(opacity=100);
+    opacity: 100;
+    background: #FFF;
+}
+
+.imageBox .imgList img {
+    width: 100%;
+    height: 100%;
+}
+
+.imagePage {
+    width: 480px;
+    height: 30px;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.imagePage a {
+    padding: 3px 8px;
+    background: #FFF;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    box-shadow: 0px 0px 3px #ddd;
+    color: #333;
+}
+
+.imagePage a.active {
+    background: red;
+}
+
+.imageBox .searchKeyWord{
+    font-size: 25px;
+    text-align: center;
+    min-width: 80px;
+    height: 38px;
+    line-height: 24px;
+    margin: 9px 5px 0 15px;
+    border: 1px solid #666;
+    border-radius: 20px;
+    color: #666;
+    background-color: transparent;
+}
+
+
+.uploadPhotoBtn{
+    position: fixed;
+    top:300px;
+    right: 30px;
+}

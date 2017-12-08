@@ -6,7 +6,6 @@
     <meta http-equiv="Page-Enter" content= "revealTrans(Duration=5.0,Transition=11)">
     <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/profile.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
 </head>
 <body>
     <!-- 全局顶部导航栏 -->
@@ -14,7 +13,7 @@
     <nav class="nav_fix_top" role="navigation">
         <div class="width-limit">
             <!-- 左上方 logo -->
-            <a class="logo" target="_self" href="index">
+            <a class="logo" target="_self" href="indexFind">
                 <img src="images/PicShare.png" title="主页">
             </a>
 
@@ -28,15 +27,15 @@
             </a>
             <!--<a class="btn sign_in" href="/signIn">登录</a>-->
 
-            <div class="container">
-                <form target="_blank" action="" accept-charset="UTF-8" method="get">
-                    <input name="utf8" type="hidden" />
-                    <input class="search_input" id="searchInput" type="text" autocomplete="off" placeholder="搜索" />
-                    <a class="search_btn" id="searchLogo" style="display: none" href="javascript:void(null)">
-                        <img src="images/searchLogo.png" width="28px" height="28px">
-                    </a>
-                </form>
-            </div>
+            <!--<div class="div_search_container">-->
+                <!--<form target="_blank" action="" accept-charset="UTF-8" method="get">-->
+                    <!--<input name="utf8" type="hidden" />-->
+                    <!--<input class="search_input" id="searchInput" type="text" autocomplete="off" placeholder="搜索" />-->
+                    <!--<a class="search_btn" id="searchLogo" style="display: none" href="javascript:void(null)">-->
+                        <!--<img src="images/searchLogo.png" width="28px" height="28px">-->
+                    <!--</a>-->
+                <!--</form>-->
+            <!--</div>-->
         </div>
     </nav>
 
@@ -76,10 +75,9 @@
         </div>
     </div>
 
-    <!--<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>-->
-    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="javascripts/md5.min.js"></script>
-    <script src="javascripts/jquery-3.2.1.js"></script>
+    <script src="javascripts/jquery/jquery-3.2.1.js"></script>
+    <script src="javascripts/jquery/jquery-ui.js"></script>
     <script>
         $(function () {
             $.get('userInfo', function (data) {
@@ -94,6 +92,12 @@
                     $.post('logout');
                 }
             });
+            $("#searchInput").focusin(function () {
+                $("#searchLogo").show();
+            });
+            $("#searchInput").focusout(function () {
+                $("#searchLogo").hide();
+            });
             $("#changeLogoBtn").click(function () {
                 $("#uploadFileBtn").click();
             })
@@ -106,13 +110,41 @@
                 $("#submitInfoDiv").show();
             })
             $("#submitInfoBtn").click(function () {
-                $("#userName").attr("readonly", "readonly");
-                $("#userEmail").attr("readonly", "readonly");
-                $("#userName").css("border","1px solid #c8c8c8");
-                $("#userEmail").css("border","1px solid #c8c8c8");
-                $("#changeInfoDiv").show();
-                $("#submitInfoDiv").hide();
+                var nameReady = true;
+                var emailReady = true;
 
+                var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+.([a-z])+$/;
+                var userName = $("#userName").val().toString();
+                var userEmail = $("#userEmail").val().toString();
+                if( userName===undefined || userName.length===0 ){
+                    $("#userName").css("border","1px solid red");
+                    nameReady = false;
+                }
+                else {
+                    $("#userName").css("border","1px solid #c8c8c8");
+                    nameReady = true;
+                }
+                if( userEmail===undefined || userEmail.length===0 || !emailReg.test(userEmail) ){
+                    $("#userEmail").css("border","1px solid red");
+                    emailReady = false;
+                }
+                else {
+                    $("#userEmail").css("border","1px solid #c8c8c8");
+                    emailReady = true;
+                }
+                if( nameReady && emailReady ) {
+                    $("#userName").attr("readonly", "readonly");
+                    $("#userEmail").attr("readonly", "readonly");
+                    $("#changeInfoDiv").show();
+                    $("#submitInfoDiv").hide();
+
+                    var data = {"userName": userName, "userEmail": userEmail};
+                    $.post('changeInfo', data, function (res) {
+                        if( !res.status ){
+                            location.reload(true);
+                        }
+                    })
+                }
             })
         });
     </script>

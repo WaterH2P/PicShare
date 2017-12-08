@@ -64,6 +64,18 @@ var signUp = function(userPassword, userName, userEmail) {
                     util.log("write id wrong");
                 }
             });
+            fs.exists(path.join(__dirname, '../public/images/'+userID), function (res) {
+                if( res ){
+                    util.log( userID + " image dir has existed!");
+                }
+                else {
+                    fs.mkdir(path.join(__dirname, '../public/images/'+userID), function (err) {
+                        if( err ){
+                            util.log( userID + " fail to create image dir !");
+                        }
+                    });
+                }
+            });
             sqlite.addUser(userID, userPassword, userName, userEmail);
         }
     }catch(err){
@@ -84,6 +96,7 @@ var signIn = function(userID, userPassword) {
                         util.log("write sign in log wrong");
                     }
                 });
+                util.log(userID + "succeed signing in");
                 return true;
             }
         }
@@ -92,7 +105,7 @@ var signIn = function(userID, userPassword) {
         util.log("sign in read file wrong");
         fs.appendFile(path.join(__dirname, './log.txt'), userID + " fail to sign in at " + new Date().getTime() + "\n", 'utf8', function (err) {
             if (err) {
-                util.log("write fail to sign in log wrong");
+                util.log("fail to write 'fail to sign in log' ");
             }
         });
         return false;

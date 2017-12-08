@@ -5,6 +5,7 @@ var path = require('path');
 var sqlite = require('sqlite3').verbose();
 
 var userTable = 'user';
+var imgTable = 'img';
 
 var db = new sqlite.Database( path.join(__dirname, 'PicShare.db') );
 global.deafultLogo = "/images/user_logos/default.png";
@@ -42,7 +43,7 @@ exports.searchUserLogo = function (userID, callback) {
                 callback( {userLogo:deafultLogo} );
             }
         }
-    })
+    });
 };
 
 exports.searchUserInfo = function (userID, callback) {
@@ -65,6 +66,100 @@ exports.searchUserInfo = function (userID, callback) {
                 callback(null);
             }
         }
-    })
+    });
+};
+
+exports.changeUserInfo = function (userID, userName, userEmail, callback) {
+    db.run("UPDATE " + userTable + " SET userName = ?, userEmail=? WHERE userID =?", userName, userEmail, userID, function (err) {
+        if( err ){
+            util.log("update info wrong : update wrong");
+            callback( false );
+        }
+        else {
+            util.log("user " + userID + " update info succeed");
+            callback( true );
+        }
+    });
+};
+
+exports.findHotImages = function (callback) {
+    db.all("SELECT imgPath FROM " + imgTable, function(err, rows) {
+        if( err ){
+            util.log("search img wrong : select img");
+            // return JSON.stringify({userLogo:deafultLogo});
+            callback(false);
+        }
+        else{
+            if( rows.length>0 ){
+                // util.log( "databse : " + JSON.stringify(rows) );
+                var imgPaths = "";
+                rows.forEach(function (row) {
+                    imgPaths += row.imgPath + ";";
+                });
+                imgPaths += imgPaths;
+                imgPaths.substr(0,imgPaths.length-1);
+                callback( imgPaths );
+            }
+            else{
+                util.log("search img wrong : no img");
+                // return JSON.stringify({userLogo:deafultLogo});
+                callback("none");
+            }
+        }
+    });
+};
+
+exports.findMyImages = function (userID, callback) {
+    db.all("SELECT imgPath FROM " + imgTable + " WHERE userID=?", userID,  function(err, rows) {
+        if( err ){
+            util.log("search my img wrong : select img");
+            // return JSON.stringify({userLogo:deafultLogo});
+            callback(null);
+        }
+        else{
+            if( rows.length>0 ){
+                // util.log( "databse : " + JSON.stringify(rows) );
+                var imgPaths = "";
+                rows.forEach(function (row) {
+                    imgPaths += row.imgPath + ";";
+                });
+                imgPaths += imgPaths;
+                imgPaths.substr(0,imgPaths.length-1);
+                callback( imgPaths );
+            }
+            else{
+                util.log("search my img wrong : no img");
+                // return JSON.stringify({userLogo:deafultLogo});
+                callback(null);
+            }
+        }
+    });
+};
+
+exports.searchImages = function (keyWord, callback) {
+    db.all("SELECT imgPath FROM " + imgTable + " WHERE imgName LIKE '%" + keyWord + "%'",  function(err, rows) {
+        if( err ){
+            util.log("search img wrong : select img");
+            // return JSON.stringify({userLogo:deafultLogo});
+            callback(null);
+        }
+        else{
+            if( rows.length>0 ){
+                // util.log( "databse : " + JSON.stringify(rows) );
+                var imgPaths = "";
+                rows.forEach(function (row) {
+                    imgPaths += row.imgPath + ";";
+                });
+                imgPaths += imgPaths;
+                imgPaths.substr(0,imgPaths.length-1);
+                callback( imgPaths );
+            }
+            else{
+                util.log("search img wrong : no img");
+                // return JSON.stringify({userLogo:deafultLogo});
+                callback(null);
+            }
+        }
+    });
 };
 

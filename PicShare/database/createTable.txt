@@ -5,3 +5,12 @@ CREATE TABLE IF NOT EXISTS user (
     userEmail VARCHAR(255),
     userLogo VARCHAR(255)
     );
+
+CREATE TABLE IF NOT EXISTS img (
+    imgID VARCHAR(50) PRIMARY KEY,
+    userID INTEGER,
+    imgPath VARCHAR(30),
+    imgDescription VARCHAR(255),
+    likeNum INTEGER,
+    imgName VARCHAR(255)
+    );

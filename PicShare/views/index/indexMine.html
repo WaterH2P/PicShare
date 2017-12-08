@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PicShare</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/jquery/jquery-ui.css">
+</head>
+
+<body>
+    <!-- 全局顶部导航栏 -->
+    <!-- 标明为导航容器 -->
+    <nav class="nav_fix_top" role="navigation">
+        <div class="width-limit">
+            <!-- 左上方 logo -->
+            <a class="logo" target="_self" href="">
+                <img src="images/PicShare.png" title="主页">
+            </a>
+
+            <!-- 右上角 -->
+            <!-- 注销 -->
+            <a class="btn logout" href="/logout">注销</a>
+            <!-- 隐形块 -->
+            <div class="invisiblebtn"></div>
+            <a class="userLogoLink" id="userLogoLink" href="profile">
+                <img class="userLogo" id="userLogo" title="个人信息">
+            </a>
+            <!--<a class="btn sign_in" href="/signIn">登录</a>-->
+
+            <div class="div_frag_container">
+                <a class="frag fragUnactive" id="fragFind" href="indexFind">发现</a>
+                <a class="frag fragActive" id="fragMine">我的</a>
+            </div>
+
+            <div class="div_search_container">
+                <form role="form" accept-charset="UTF-8" method="get" onsubmit="return false">
+                    <input class="search_input" id="searchInput" type="text"
+                           name="keyWord" placeholder="搜索"/>
+                    <input class="search_btn" id="searchLogo"
+                           type="submit" value="🔍"/>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 照片墙主体部分 -->
+
+    <!-- 照片墙主体部分 -->
+    <div class="imgContainer" id="photoShow">
+        <div class="imageBox" id="imageBox">
+        </div>
+
+        <!--<div class="imagePage" id="imagePage">-->
+        <!--<a href="javascript:void(0);" class="active" id="imgPageBtn1">1</a>-->
+        <!--</div>-->
+    </div>
+
+    <div class="uploadPhotoBtn">
+        <a href="uploadImg">
+            <button>上传图片</button>
+        </a>
+    </div>
+
+    <div class="imgContainer" style="display: none" id="searchPhotoShow">
+        <div class="imageBox" id="searchImageBox">
+            <input class="searchKeyWord" type="text" id="searchKeyWord" />
+            <h2>搜索结果</h2>
+            <br>
+        </div>
+    </div>
+
+<script src="javascripts/md5.min.js"></script>
+<script src="javascripts/jquery/jquery-3.2.1.js"></script>
+<script src="javascripts/jquery/jquery-ui.js"></script>
+<script>
+    $("#searchLogo").click(function () {
+        var keyWord = $("#searchInput").val().toString();
+        if( keyWord!==undefined && keyWord.length>0 ){
+            var data = {keyWord: keyWord};
+            $.post('searchImage', data, function (data) {
+                if (data) {
+                    $("#searchPhotoShow").show();
+                    $("#photoShow").hide();
+                    var imgPaths = data.split(';');
+                    for (var i = 1; i < imgPaths.length; i++) {
+                        if (imgPaths[i].length > 1) {
+                            var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
+                            $("#searchImageBox").append(divImg);
+                        }
+                    }
+                }
+                else {
+
+                }
+            });
+        }
+        $("#searchInput").val("");
+        $("#searchKeyWord").val(keyWord);
+    });
+    $(function () {
+        $.get('userLogo', function (data) {
+            $("#userLogo").attr("src", data.userLogo);
+        });
+        $.get('myImages', function (data) {
+            if (data) {
+                if( data==="none" ){
+                    var divImg = "<h2>你还未上传图片。。。</h2>";
+                    $("#imageBox").append(divImg);
+                }
+                else{
+                    var imgPaths = data.split(';');
+                    for (var i = 0; i < imgPaths.length; i++) {
+                        if (imgPaths[i].length > 1) {
+                            var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
+                            $("#imageBox").append(divImg);
+                        }
+                    }
+                }
+            }
+            else {
+                var divImg = "<h2>抱歉，未拿到图片。。。</h2>";
+                $("#imageBox").append(divImg);
+            }
+        })
+    });
+</script>
+</body>
+
+</html>
