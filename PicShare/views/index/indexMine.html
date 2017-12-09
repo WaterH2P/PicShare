@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>PicShare</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery/jquery-ui.css">
 </head>
 
@@ -21,8 +21,9 @@
             <!-- 右上角 -->
             <!-- 注销 -->
             <a class="btn logout" href="/logout">注销</a>
-            <!-- 隐形块 -->
-            <div class="invisiblebtn"></div>
+
+            <button class="btn logout" id="uploadPictureBtn">上传图片</button>
+
             <a class="userLogoLink" id="userLogoLink" href="profile">
                 <img class="userLogo" id="userLogo" title="个人信息">
             </a>
@@ -45,86 +46,178 @@
     </nav>
 
     <!-- 照片墙主体部分 -->
+    <div class="coolBackground" id="coolBackgroundDiv">
+        <canvas id="display" style="position: fixed"></canvas>
+        <div id="blachole" style="position: fixed"></div>
 
-    <!-- 照片墙主体部分 -->
-    <div class="imgContainer" id="photoShow">
-        <div class="imageBox" id="imageBox">
+        <!-- 照片墙主体部分 -->
+        <div class="imgContainer" id="imageShow">
+            <div class="imageBox" id="imageBox">
+            </div>
         </div>
 
-        <!--<div class="imagePage" id="imagePage">-->
-        <!--<a href="javascript:void(0);" class="active" id="imgPageBtn1">1</a>-->
-        <!--</div>-->
-    </div>
+        <!-- 搜索照片结果展示部分 -->
+        <div class="imgContainer" style="display: none" id="searchImageShow">
+            <div class="KeyWordLabel">
+                <input class="searchKeyWord" type="text" id="searchKeyWord" readonly/>
+                <h2>搜索结果</h2>
+            </div>
+            <div class="imageBox" id="searchImageBox">
+            </div>
+        </div>
 
-    <div class="uploadPhotoBtn">
-        <a href="uploadImg">
-            <button>上传图片</button>
-        </a>
-    </div>
-
-    <div class="imgContainer" style="display: none" id="searchPhotoShow">
-        <div class="imageBox" id="searchImageBox">
-            <input class="searchKeyWord" type="text" id="searchKeyWord" />
-            <h2>搜索结果</h2>
-            <br>
+        <!-- 上传图片部分 -->
+        <div class="imgContainer" style="display: none" id="uploadImageShow">
+            <div class="imageBox" id="uploadImageBox">
+                <div style="display: inline-block; margin: 5px; width:100%;">
+                    <input type="file" name="imageUpload" id="imageUpload" accept="image/jpeg,image/jpg,image/png">
+                    <input style="display:none; width: 40px" id="percentShow" readonly>
+                    <input type="submit" id="imageUploadSubmit">
+                </div>
+                <div style="display: inline-block; margin: 5px; width:100%;">
+                    <h3 id="uploadResultShow" style="display: none"></h3>
+                </div>
+            </div>
         </div>
     </div>
 
-<script src="javascripts/md5.min.js"></script>
-<script src="javascripts/jquery/jquery-3.2.1.js"></script>
-<script src="javascripts/jquery/jquery-ui.js"></script>
-<script>
-    $("#searchLogo").click(function () {
-        var keyWord = $("#searchInput").val().toString();
-        if( keyWord!==undefined && keyWord.length>0 ){
-            var data = {keyWord: keyWord};
-            $.post('searchImage', data, function (data) {
+    <script src="javascripts/md5.min.js"></script>
+    <script src="javascripts/jquery/jquery-3.2.1.js"></script>
+    <script src="javascripts/jquery/jquery-ui.js"></script>
+    <script src="javascripts/index/constellation.js"></script>
+    <script>
+        $(function () {
+            $.get('userLogo', function (data) {
+                $("#userLogo").attr("src", data.userLogo);
+            });
+            $.get('myImages', function (data) {
                 if (data) {
-                    $("#searchPhotoShow").show();
-                    $("#photoShow").hide();
-                    var imgPaths = data.split(';');
-                    for (var i = 1; i < imgPaths.length; i++) {
-                        if (imgPaths[i].length > 1) {
-                            var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
-                            $("#searchImageBox").append(divImg);
+                    if( data==="none" ){
+                        var divImg = "<h2>你还未上传图片。。。</h2>";
+                        $("#imageBox").append(divImg);
+                    }
+                    else{
+                        var imgPaths = data.split(';');
+                        for (var i = 0; i < imgPaths.length; i++) {
+                            if (imgPaths[i].length > 1) {
+                                var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
+                                $("#imageBox").append(divImg);
+                            }
                         }
                     }
                 }
                 else {
-
-                }
-            });
-        }
-        $("#searchInput").val("");
-        $("#searchKeyWord").val(keyWord);
-    });
-    $(function () {
-        $.get('userLogo', function (data) {
-            $("#userLogo").attr("src", data.userLogo);
-        });
-        $.get('myImages', function (data) {
-            if (data) {
-                if( data==="none" ){
-                    var divImg = "<h2>你还未上传图片。。。</h2>";
+                    var divImg = "<h2>抱歉，未拿到图片。。。</h2>";
                     $("#imageBox").append(divImg);
                 }
-                else{
-                    var imgPaths = data.split(';');
-                    for (var i = 0; i < imgPaths.length; i++) {
-                        if (imgPaths[i].length > 1) {
-                            var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
-                            $("#imageBox").append(divImg);
+            });
+            $("#coolBackgroundDiv").css("min-height", $(window).height());
+        });
+        $("#searchLogo").click(function () {
+            $("#searchImageBox").empty();
+            var keyWord = $("#searchInput").val().toString();
+            if( keyWord!==undefined && keyWord.length>0 ){
+                var data = {keyWord: keyWord};
+                $.post('searchImage', data, function (data) {
+                    if (data) {
+                        $("#imageShow").hide();
+                        $("#searchImageShow").show();
+                        $("#uploadImageShow").hide();
+                        var imgPaths = data.split(';');
+                        for (var i = 0; i < imgPaths.length; i++) {
+                            if (imgPaths[i].length > 1) {
+                                var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
+                                $("#searchImageBox").append(divImg);
+                            }
                         }
                     }
-                }
+                });
             }
-            else {
-                var divImg = "<h2>抱歉，未拿到图片。。。</h2>";
-                $("#imageBox").append(divImg);
+            $("#searchInput").val("");
+            $("#searchKeyWord").val(keyWord);
+        });
+        $("#uploadPictureBtn").click(function () {
+            $("#imageShow").hide();
+            $("#searchImageShow").hide();
+            $("#uploadImageShow").show();
+            $("#progressBar").css("display", "block");
+        });
+        $("#imageUploadSubmit").click(function () {
+            var imageUpload = document.getElementById("imageUpload");
+            if( imageUpload.files.length>0 ) {
+                var myImage = new FormData();
+                // fileInputElement中已经包含了用户所选择的文件
+                myImage.append("imageUpload", imageUpload.files[0]);
+
+    //            $('#percentShow').show();
+    //            var xhrOnProgress = function(fun) {
+    //                xhrOnProgress.onprogress = fun; //绑定监听
+    //                return function() {
+    //                    //通过$.ajaxSettings.xhr();获得XMLHttpRequest对象
+    //                    var xhr = $.ajaxSettings.xhr();
+    //                    //判断监听函数是否为函数
+    //                    if (typeof xhrOnProgress.onprogress !== 'function')
+    //                        return xhr;
+    //                    //如果有监听函数并且xhr对象支持绑定时就把监听函数绑定上去
+    //                    if (xhrOnProgress.onprogress && xhr.upload) {
+    //                        xhr.upload.onprogress = xhrOnProgress.onprogress;
+    //                    }
+    //                    return xhr;
+    //                }
+    //            };
+                $.ajax({
+                    type: 'post',
+                    url: 'uploadImage',
+                    data: myImage,
+                    cache: false,
+                    contentType: false,     // 当有文件要上传时，此项是必须的，否则后台无法识别文件流的起始位置(详见：https://segmentfault.com/a/1190000007207128)
+                    processData: false,     // 是否序列化data属性，默认true(注意：false时type必须是post，详见：https://zhidao.baidu.com/question/1926250710050869147.html?qbl=relate_question_0&word=processData)
+    //                xhr: xhrOnProgress(function(e){     // (详见：http://www.imooc.com/article/5879)
+    //                    var percent= e.loaded / e.total; //计算百分比
+    //                    $('#percentShow').append('->'+ percent);
+    //                }),
+                    success: function(res) {
+                        $('#uploadResultShow').show();
+                        $('#uploadResultShow').css("color", "#ea6f5a");
+                        $('#uploadResultShow').text(res);
+                    }
+                })
             }
-        })
-    });
-</script>
+        });
+
+        // 炫酷的背景
+        $(function () {
+            var e = document.getElementById("display");
+            $(e).attr("width", $(window).width() * scale_ratio),
+                $(e).attr("height", $(window).height() * scale_ratio),
+                $(e).css("width", $(window).width()),
+                $(e).css("height", $(window).height()),
+                display = new Display(document.getElementById("display")),
+                display.scale = scale_ratio,
+                display.init(),
+                particleSystem = (new ParticleSystem).init(display),
+                display.start(),
+                addEmittersAndFields(particleSystem);
+            var t = null;
+            $(window).resize(function () {
+                clearTimeout(t),
+                    t = setTimeout(function () {
+                            particleSystem.emitters = [],
+                                particleSystem.fields = [];
+                            var e = document.getElementById("display");
+                            $(e).attr("width", $(window).width() * scale_ratio),
+                                $(e).attr("height", $(window).height() * scale_ratio),
+                                $(e).css("width", $(window).width()),
+                                $(e).css("height", $(window).height()),
+                                particleSystem.display.context.scale(scale_ratio, scale_ratio),
+                                particleSystem.display.scale = scale_ratio,
+                                particleSystem.display.calculate_scale(),
+                                addEmittersAndFields(particleSystem)
+                        },
+                        300)
+            })
+        });
+    </script>
 </body>
 
 </html>

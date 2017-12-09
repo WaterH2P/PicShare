@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>个人信息</title>
     <meta http-equiv="Page-Enter" content= "revealTrans(Duration=5.0,Transition=11)">
-    <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/profile.css">
 </head>
 <body>
@@ -25,59 +25,59 @@
             <a class="userLogoLink" id="userLogoLink" href="javascript:void(null)">
                 <img class="userLogo" id="userLogo" title="个人信息">
             </a>
-            <!--<a class="btn sign_in" href="/signIn">登录</a>-->
-
-            <!--<div class="div_search_container">-->
-                <!--<form target="_blank" action="" accept-charset="UTF-8" method="get">-->
-                    <!--<input name="utf8" type="hidden" />-->
-                    <!--<input class="search_input" id="searchInput" type="text" autocomplete="off" placeholder="搜索" />-->
-                    <!--<a class="search_btn" id="searchLogo" style="display: none" href="javascript:void(null)">-->
-                        <!--<img src="images/searchLogo.png" width="28px" height="28px">-->
-                    <!--</a>-->
-                <!--</form>-->
-            <!--</div>-->
         </div>
     </nav>
 
     <!-- ----------------------- 导航栏以下 ----------------------- -->
 
-    <div class="div_log_fix">
-        <img class="userBigLogo" id="userBigLogo" src="">
-        <input type="file" id="uploadFileBtn" style="display: none">
-        <button class="changeLogoBtn" id="changeLogoBtn">更改头像</button>
-        <div style="display: inline-block">
+    <div class="coolBackground" id="coolBackgroundDiv">
+        <canvas id="display" style="position: fixed"></canvas>
+        <div id="blachole" style="position: fixed"></div>
 
+        <div class="div_log_fix">
+            <img class="userBigLogo" id="userBigLogo" src="">
+            <input type="file" id="uploadFileBtn" style="display: none">
+            <button class="changeLogoBtn" id="changeLogoBtn">更改头像</button>
+            <div style="display: inline-block">
+
+            </div>
         </div>
-    </div>
 
-    <div class="profile_page">
-        <div class="main">
-            <div class="info_frag">
-                <label class="info_common info_label">账号</label>
-                <input type="text" class="info_common" id="userID" readonly>
+        <div class="profile_page">
+            <div class="main">
+                <div class="info_frag">
+                    <label class="info_common info_label">账号</label>
+                    <input type="text" class="info_common" id="userID" readonly>
+                </div>
+                <div class="info_frag">
+                    <label class="info_common info_label">昵称</label>
+                    <input type="text" class="info_common" id="userName" maxlength="18" readonly>
+                </div>
+                <div class="info_frag">
+                    <label class="info_common info_label">邮箱</label>
+                    <input type="email" class="info_common" id="userEmail"  maxlength="18" readonly>
+                </div>
+                <!--<div class="info_frag" id="changeInfoDiv">-->
+                    <!--<button class="changeInfoBtn" id="changeInfoBtn">修改信息</button>-->
+                    <!--<input type="text" class="info_common" style="visibility: hidden" readonly>-->
+                <!--</div>-->
+                <!--<div class="info_frag" id="submitInfoDiv" style="display:none">-->
+                    <!--<button class="submitInfoBtn" id="submitInfoBtn">提交修改</button>-->
+                    <!--<input type="text" class="info_common" style="visibility: hidden" readonly>-->
+                <!--</div>-->
             </div>
-            <div class="info_frag">
-                <label class="info_common info_label">昵称</label>
-                <input type="text" class="info_common" id="userName" maxlength="18" readonly>
-            </div>
-            <div class="info_frag">
-                <label class="info_common info_label">邮箱</label>
-                <input type="email" class="info_common" id="userEmail"  maxlength="18" readonly>
-            </div>
-            <div class="info_frag" id="changeInfoDiv">
-                <button class="changeInfoBtn" id="changeInfoBtn">修改信息</button>
-                <input type="text" class="info_common" style="visibility: hidden" readonly>
-            </div>
-            <div class="info_frag" id="submitInfoDiv" style="display:none">
-                <button class="submitInfoBtn" id="submitInfoBtn">提交修改</button>
-                <input type="text" class="info_common" style="visibility: hidden" readonly>
-            </div>
+        </div>
+
+        <div class="div_btn_fix">
+            <button id="changeInfoBtn">修改信息</button>
+            <button id="submitInfoBtn" style="display: none">提交修改</button>
         </div>
     </div>
 
     <script src="javascripts/md5.min.js"></script>
     <script src="javascripts/jquery/jquery-3.2.1.js"></script>
     <script src="javascripts/jquery/jquery-ui.js"></script>
+    <script src="javascripts/index/constellation.js"></script>
     <script>
         $(function () {
             $.get('userInfo', function (data) {
@@ -100,15 +100,15 @@
             });
             $("#changeLogoBtn").click(function () {
                 $("#uploadFileBtn").click();
-            })
+            });
             $("#changeInfoBtn").click(function () {
                 $("#userName").removeAttr("readonly");
                 $("#userEmail").removeAttr("readonly");
                 $("#userName").css("border", "2px solid #55E9FF")
                 $("#userEmail").css("border", "2px solid #55E9FF")
-                $("#changeInfoDiv").hide();
-                $("#submitInfoDiv").show();
-            })
+                $("#changeInfoBtn").hide();
+                $("#submitInfoBtn").show();
+            });
             $("#submitInfoBtn").click(function () {
                 var nameReady = true;
                 var emailReady = true;
@@ -135,8 +135,8 @@
                 if( nameReady && emailReady ) {
                     $("#userName").attr("readonly", "readonly");
                     $("#userEmail").attr("readonly", "readonly");
-                    $("#changeInfoDiv").show();
-                    $("#submitInfoDiv").hide();
+                    $("#changeInfoBtn").show();
+                    $("#submitInfoBtn").hide();
 
                     var data = {"userName": userName, "userEmail": userEmail};
                     $.post('changeInfo', data, function (res) {
@@ -145,8 +145,42 @@
                         }
                     })
                 }
+            });
+        });
+
+        // 炫酷的背景
+        $(function () {
+            var e = document.getElementById("display");
+            $(e).attr("width", $(window).width() * scale_ratio),
+                $(e).attr("height", $(window).height() * scale_ratio),
+                $(e).css("width", $(window).width()),
+                $(e).css("height", $(window).height()),
+                display = new Display(document.getElementById("display")),
+                display.scale = scale_ratio,
+                display.init(),
+                particleSystem = (new ParticleSystem).init(display),
+                display.start(),
+                addEmittersAndFields(particleSystem);
+            var t = null;
+            $(window).resize(function () {
+                clearTimeout(t),
+                    t = setTimeout(function () {
+                            particleSystem.emitters = [],
+                                particleSystem.fields = [];
+                            var e = document.getElementById("display");
+                            $(e).attr("width", $(window).width() * scale_ratio),
+                                $(e).attr("height", $(window).height() * scale_ratio),
+                                $(e).css("width", $(window).width()),
+                                $(e).css("height", $(window).height()),
+                                particleSystem.display.context.scale(scale_ratio, scale_ratio),
+                                particleSystem.display.scale = scale_ratio,
+                                particleSystem.display.calculate_scale(),
+                                addEmittersAndFields(particleSystem)
+                        },
+                        300)
             })
         });
+
     </script>
 </body>
 </html>

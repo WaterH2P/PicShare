@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS img (
     imgPath VARCHAR(30),
     imgDescription VARCHAR(255),
     likeNum INTEGER,
-    imgName VARCHAR(255)
+    imgName VARCHAR(255),
+    imgRank INTEGER
     );

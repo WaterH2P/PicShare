@@ -1,7 +1,6 @@
 
 var util = require('util');
 var path = require('path');
-var async = require('async');
 var fs = require('fs');
 
 var express = require('express');

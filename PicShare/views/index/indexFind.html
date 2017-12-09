@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>PicShare</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery/jquery-ui.css">
 </head>
 
@@ -44,36 +44,41 @@
 		</div>
 	</nav>
 
-    <!-- 照片墙主体部分 -->
-    <div class="imgContainer" id="photoShow">
-        <div class="imageBox" id="imageBox">
+    <div class="coolBackground" id="coolBackgroundDiv">
+        <canvas id="display" style="position: fixed"></canvas>
+        <div id="blachole" style="position: fixed"></div>
+
+        !-- 照片墙主体部分 -->
+        <div class="imgContainer" id="imageShow">
+            <div class="imageBox" id="imageBox">
+            </div>
+        </div>
+
+        <!-- 搜索照片结果展示部分 -->
+        <div class="imgContainer" style="display: none" id="searchImageShow">
+            <div class="KeyWordLabel">
+                <input class="searchKeyWord" type="text" id="searchKeyWord" readonly/>
+                <h2>搜索结果</h2>
+            </div>
+            <div class="imageBox" id="searchImageBox">
+            </div>
         </div>
     </div>
 
-    <div class="imgContainer" style="display: none" id="searchPhotoShow">
-        <div class="imageBox" id="searchImageBox">
-            <input class="searchKeyWord" type="text" id="searchKeyWord" />
-            <h2>搜索结果</h2>
-            <br>
-        </div>
-    </div>
-
-
-    <!--<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>-->
-    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="javascripts/md5.min.js"></script>
     <script src="javascripts/jquery/jquery-3.2.1.js"></script>
     <script src="javascripts/jquery/jquery-ui.js"></script>
-    <script src="javascripts/index/imgMove.js"></script>
+    <script src="javascripts/index/constellation.js"></script>
     <script>
         $("#searchLogo").click(function () {
+            $("#searchImageBox").empty();
             var keyWord = $("#searchInput").val().toString();
             if( keyWord!==undefined && keyWord.length>0 ){
                 var data = {keyWord: keyWord};
                 $.post('searchImage', data, function (data) {
                     if (data) {
-                        $("#searchPhotoShow").show();
-                        $("#photoShow").hide();
+                        $("#searchImageShow").show();
+                        $("#imageShow").hide();
                         var imgPaths = data.split(';');
                         for (var i = 1; i < imgPaths.length; i++) {
                             if (imgPaths[i].length > 1) {
@@ -94,7 +99,7 @@
             $.get('hotImages', function (data) {
                 if (data) {
                     var imgPaths = data.split(';');
-                    for (var i = 1; i < imgPaths.length; i++) {
+                    for (var i = 0; i < imgPaths.length; i++) {
                         if( imgPaths[i].length>1 ) {
                             var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
                             $("#imageBox").append(divImg);
@@ -102,8 +107,43 @@
                     }
                 }
             });
-        })
+            $("#coolBackgroundDiv").css("min-height", $(window).height());
+        });
+
+        // 炫酷的背景
+        $(function () {
+            var e = document.getElementById("display");
+            $(e).attr("width", $(window).width() * scale_ratio),
+                $(e).attr("height", $(window).height() * scale_ratio),
+                $(e).css("width", $(window).width()),
+                $(e).css("height", $(window).height()),
+                display = new Display(document.getElementById("display")),
+                display.scale = scale_ratio,
+                display.init(),
+                particleSystem = (new ParticleSystem).init(display),
+                display.start(),
+                addEmittersAndFields(particleSystem);
+            var t = null;
+            $(window).resize(function () {
+                clearTimeout(t),
+                    t = setTimeout(function () {
+                            particleSystem.emitters = [],
+                                particleSystem.fields = [];
+                            var e = document.getElementById("display");
+                            $(e).attr("width", $(window).width() * scale_ratio),
+                                $(e).attr("height", $(window).height() * scale_ratio),
+                                $(e).css("width", $(window).width()),
+                                $(e).css("height", $(window).height()),
+                                particleSystem.display.context.scale(scale_ratio, scale_ratio),
+                                particleSystem.display.scale = scale_ratio,
+                                particleSystem.display.calculate_scale(),
+                                addEmittersAndFields(particleSystem)
+                        },
+                        300)
+            })
+        });
     </script>
+
 </body>
 
 </html>
