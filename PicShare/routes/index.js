@@ -86,6 +86,15 @@ router.route('/myImages')
         })
     });
 
+router.route('/searchMyImage')
+    .post(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        var keyWord = req.body.keyWord;
+        sqlite.selectMyImageFuzzily(userID, keyWord, function (result) {
+            res.send( JSON.stringify(result) );
+        })
+    });
+
 router.route('/delMyImage')
     .post(function (req, res, next) {
         var userID = userOnline[req.session.user];

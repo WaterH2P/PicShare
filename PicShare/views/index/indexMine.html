@@ -162,15 +162,16 @@
             var keyWord = $("#searchInput").val().toString();
             if( keyWord!==undefined && keyWord.length>0 ){
                 var data = {"keyWord": keyWord};
-                $.post('searchImage', data, function (data) {
+                $.post('searchMyImage', data, function (data) {
                     if (data) {
+                        var imgInfos = $.parseJSON( data );
                         $("#imageShow").hide();
                         $("#searchImageShow").show();
                         $("#uploadImageShow").hide();
-                        var imgPaths = data.split(';');
-                        for (var i = 0; i < imgPaths.length; i++) {
-                            if (imgPaths[i].length > 1) {
-                                var divImg = "<div class='imgList'><img src='" + imgPaths[i] + "'/></div>";
+                        for (var i = 0; i < imgInfos.length; i++) {
+                            var imgInfo = imgInfos[i];
+                            if ( imgInfo.imgPath ) {
+                                var divImg = "<div class='imgList'><img src='" + imgInfo.imgPath + "'/></div>";
                                 $("#searchImageBox").append(divImg);
                             }
                         }

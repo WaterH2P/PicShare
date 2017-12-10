@@ -180,9 +180,7 @@ exports.selectUserFuzzily = function (userID, keyWord, callback) {
 };
 
 exports.selectHotImages = function (userID, callback) {
-    db.all("SELECT imgID, userID, imgPath FROM " + imgTable + "," + followTable +
-        " WHERE followerID=? and userID<>followedID ORDER BY likeNum", userID, function(err, rows) {
-    // db.all("SELECT imgID, userID, imgPath FROM " + imgTable + " ORDER BY likeNum", function(err, rows) {
+    db.all("SELECT imgID, userID, imgPath FROM " + imgTable + " ORDER BY likeNum", function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
             callback(false);
@@ -294,6 +292,33 @@ exports.selectMyImageNames = function (userID, callback) {
             }
             else{
                 util.log("search my imgName wrong : no img");
+                callback([]);
+            }
+        }
+    });
+};
+
+exports.selectMyImageFuzzily = function (userID, keyWord, callback) {
+    db.all("SELECT imgID, imgPath, likeNum FROM " + imgTable +
+        " WHERE userID=? and imgName LIKE '%" + keyWord + "%'", userID,  function(err, rows) {
+        if( err ){
+            util.log("search my img info wrong : select img");
+            callback(null);
+        }
+        else{
+            if( rows.length>0 ){
+                var imgInfos = [];
+                var index = 0;
+                var imgInfo = {};
+                rows.forEach(function (row) {
+                    imgInfo = {"imgID":row.imgID, "imgPath":row.imgPath, "likeNum":row.likeNum};
+                    imgInfos[index] = imgInfo;
+                    index++;
+                });
+                callback( imgInfos );
+            }
+            else{
+                util.log("search my img info wrong : no img");
                 callback([]);
             }
         }
