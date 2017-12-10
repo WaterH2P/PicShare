@@ -1,0 +1,119 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    padding: 0!important;
+    margin: 0!important;
+
+    min-width: 768px;
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    font-size: 17px;
+}
+
+div {
+    display: block;
+}
+
+.profile_page {
+    margin-top: 10px;
+    height: 100%;
+    min-height: 750px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.profile_page .main {
+    width: 70%;
+    min-width: 600px;
+    margin: 60px auto 0;
+    padding: 50px 50px 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0,0,0,.1);
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.profile_page .main .info_frag{
+    background: transparent;
+    margin: 15px 30px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.profile_page .main .info_frag .inputCommon{
+    font-family: Georgia,Times New Roman,Times,Songti SC,serif;
+    position: relative;
+    margin: 10px 20px;
+    text-align: center;
+    font-size: 20px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.profile_page .main .info_frag .IDInput{
+    text-align: center;
+    font-size: 20px;
+    width: 80px;
+    border-right: 1px solid #0b88ff;
+}
+
+.profile_page .main .info_frag .nameInput{
+    text-align: center;
+    font-size: 20px;
+    width: 200px;
+    border-right: 1px solid #0b88ff;
+}
+
+.profile_page .main .info_frag .unFollowBtn{
+    font-family: Georgia,Times New Roman,Times,Songti SC,serif;
+    text-align: center;
+    height: 35px;
+    width: 80px;
+    font-size: 13px;
+    border: 1px solid #666;
+    border-radius: 20px;
+    cursor: pointer;
+
+    color: #666;
+    background-color: transparent;
+}
+
+.profile_page .main .info_frag .unFollowBtn:hover{
+    border: 1px solid rgba(236, 97, 73, .7);
+    color: #ea6f5a;
+    -moz-box-shadow: #666 0 0 5px;
+    -webkit-box-shadow: #666 0 0 5px;
+    box-shadow: #666 0 0 5px;
+}
+
+.backToFollowListBtn{
+    position: fixed;
+    top: 100px;
+    left: 80px;
+    width: 50px;
+    height: 30px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    cursor: pointer;
+    background: #ffffff;
+}
+
+.backToFollowListBtn:hover{
+    background: #c1f7ff;
+}
+
+.tellInput {
+    font-family: Georgia,Times New Roman,Times,Songti SC,serif;
+    float: right;
+    width: 150px;
+    height: 38px;
+    line-height: 30px;
+    margin: 9px 5px 0 15px;
+    border: 1px solid #666;
+    border-radius: 20px;
+    font-size: 20px;
+    color: #666;
+    background-color: transparent;
+}

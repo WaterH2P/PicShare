@@ -6,6 +6,7 @@ var sqlite = require('sqlite3').verbose();
 
 var userTable = 'user';
 var imgTable = 'img';
+var followTable = 'follow';
 
 var db = new sqlite.Database( path.join(__dirname, 'PicShare.db') );
 global.deafultLogo = "/images/user_logos/default.png";
@@ -34,14 +35,25 @@ exports.selectUserLogo = function (userID, callback) {
         else{
             if( rows.length>0 ){
                 util.log("search logo succeed :" + rows[0].userLogo );
-                // return JSON.stringify(rows[0]);
                 callback( {userLogo:rows[0].userLogo} );
             }
             else{
                 util.log("search logo wrong : no path");
-                // return JSON.stringify({userLogo:deafultLogo});
                 callback( {userLogo:deafultLogo} );
             }
+        }
+    });
+};
+
+exports.updateUserLogo = function (userID, logoPath, callback) {
+    db.run("UPDATE " + userTable + " SET userLogo=? WHERE userID=?", logoPath, userID, function (err) {
+        if( err ){
+            util.log("update user logo : update wrong");
+            callback( false );
+        }
+        else {
+            util.log("user " + userID + " update logo succeed");
+            callback( true );
         }
     });
 };
@@ -51,18 +63,14 @@ exports.selectUserInfo = function (userID, callback) {
     db.all("SELECT * FROM " + userTable + " WHERE userID = ?", userID, function(err, rows) {
         if( err ){
             util.log("search logo wrong : select wrong");
-            // return JSON.stringify({userLogo:deafultLogo});
-            callback(null);
         }
         else{
             if( rows.length>0 ){
                 util.log("search logo succeed :" + rows[0].userLogo );
-                // return JSON.stringify(rows[0]);
                 callback(rows[0]);
             }
             else{
                 util.log("search logo wrong : no path");
-                // return JSON.stringify({userLogo:deafultLogo});
                 callback(null);
             }
         }
@@ -82,52 +90,186 @@ exports.updateUserInfo = function (userID, userName, userEmail, callback) {
     });
 };
 
-exports.selectHotImages = function (callback) {
-    db.all("SELECT imgPath FROM " + imgTable, function(err, rows) {
+exports.selectFollowInfo = function (followerID, callback) {
+    util.log("database search followInfo: " + followerID);
+    db.all("SELECT userID, userName, userEmail FROM " + followTable + "," + userTable +
+        " WHERE followerID = ? and userID=followedID", followerID, function(err, rows) {
         if( err ){
-            util.log("search img wrong : select img");
-            // return JSON.stringify({userLogo:deafultLogo});
-            callback(false);
+            util.log("search followInfo wrong : select wrong");
+            callback(null);
         }
         else{
             if( rows.length>0 ){
-                // util.log( "databse : " + JSON.stringify(rows) );
-                var imgPaths = "";
+                util.log("search followInfo succeed ");
+                var followListInfo = [];
+                var index = 0;
+                var followInfo = {};
                 rows.forEach(function (row) {
-                    imgPaths += row.imgPath + ";";
+                    followInfo = {"userID":row.userID, "userName":row.userName, "userEmail":row.userEmail};
+                    followListInfo[index] = followInfo;
+                    index++;
                 });
-                imgPaths.substr(0,imgPaths.length-1);
-                callback( imgPaths );
+                callback( followListInfo );
             }
             else{
-                util.log("search img wrong : no img");
-                // return JSON.stringify({userLogo:deafultLogo});
-                callback("none");
+                util.log("search followInfo wrong : no info");
+                callback([]);
             }
         }
     });
 };
 
-exports.selectMyImagePaths = function (userID, callback) {
-    db.all("SELECT imgPath FROM " + imgTable + " WHERE userID=?", userID,  function(err, rows) {
+exports.addFollow = function (userID, followedID, callback) {
+    var followID = userID + "_" + followedID;
+    db.run("INSERT INTO " + followTable + " VALUES(?,?,?)", followID, userID, followedID, function (err) {
         if( err ){
-            util.log("search my imgPath wrong : select img");
-            // return JSON.stringify({userLogo:deafultLogo});
+            util.log( userID + " fail to follow " + followedID );
+            var result = {"status":false};
+            callback( result );
+        }
+        else{
+            util.log( userID + " succeed following " + followedID );
+            var result = {"status":true};
+            callback( result );
+        }
+    })
+};
+
+exports.deleteFollow = function (followerID, followedID, callback) {
+    db.run("DELETE FROM " + followTable + " WHERE followerID=? and followedID=?", followerID, followedID, function (err) {
+        var status = true;
+        if( err ){
+            status = false;
+            util.log(followerID + " fail to cancel follow " + followedID);
+        }
+        else{
+            status = true;
+            util.log(followerID + " succeed canceling follow " + followedID);
+        }
+        var result = {"status":status};
+        callback( result );
+    })
+};
+
+exports.selectUserFuzzily = function (userID, keyWord, callback) {
+    db.all("SELECT userID, userName, userEmail FROM " + userTable
+        + " WHERE userID<>? and userName LIKE '%" + keyWord + "%' and userID NOT IN(" +
+        "SELECT followedID FROM " + followTable + " WHERE followerID=?)", userID, userID, function(err, rows) {
+        if( err ){
+            util.log("search follow wrong : select follow");
             callback(null);
         }
         else{
             if( rows.length>0 ){
-                // util.log( "databse : " + JSON.stringify(rows) );
-                var imgPaths = "";
+                var info = {};
+                var usersInfo = [];
+                var index = 0;
                 rows.forEach(function (row) {
-                    imgPaths += row.imgPath + ";";
+                    info = {"userID":row.userID, "userName":row.userName, "userEmail":row.userEmail};
+                    usersInfo[index] = info;
+                    index++;
                 });
-                imgPaths.substr(0,imgPaths.length-1);
+                callback( usersInfo );
+            }
+            else{
+                util.log("search follow wrong : no follow");
+                callback(null);
+            }
+        }
+    });
+};
+
+exports.selectHotImages = function (userID, callback) {
+    db.all("SELECT imgID, userID, imgPath FROM " + imgTable + "," + followTable +
+        " WHERE followerID=? and userID<>followedID ORDER BY likeNum", userID, function(err, rows) {
+    // db.all("SELECT imgID, userID, imgPath FROM " + imgTable + " ORDER BY likeNum", function(err, rows) {
+        if( err ){
+            util.log("search img wrong : select img");
+            callback(false);
+        }
+        else{
+            if( rows.length>0 ){
+                var imgPaths = [];
+                var index = 0;
+                var imgPath = {};
+                rows.forEach(function (row) {
+                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath};
+                    imgPaths[index] = imgPath;
+                    index++;
+                });
+                callback( imgPaths );
+            }
+            else{
+                util.log("search img wrong : no img");
+                callback(false);
+            }
+        }
+    });
+};
+
+exports.selectFollowImages = function (userID, callback) {
+    db.all("SELECT imgID, userID, imgPath FROM " + imgTable + "," + followTable +
+        " WHERE followerID=? and userID=followedID", userID, function(err, rows) {
+        if( err ){
+            util.log("search img wrong : select img");
+            callback(false);
+        }
+        else{
+            if( rows.length>0 ){
+                var imgPaths = [];
+                var index = 0;
+                var imgPath = {};
+                rows.forEach(function (row) {
+                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath};
+                    imgPaths[index] = imgPath;
+                    index++;
+                });
+                callback( imgPaths );
+            }
+            else{
+                util.log("search img wrong : no img");
+                callback(false);
+            }
+        }
+    });
+};
+
+exports.updateImageLikeNum = function (userID, imgID, callback) {
+    db.run("UPDATE " + imgTable + " SET likeNum=likeNum+1 WHERE imgID=?", imgID, function (err) {
+        var status = true;
+        if( err ){
+            status = false;
+            util.log(userID + " fail to good image " + imgID);
+        }
+        else{
+            status = true;
+            util.log(userID + " succeed good image " + imgID);
+        }
+        var result = {"status":status};
+        callback( result );
+    })
+};
+
+exports.selectMyImagePaths = function (userID, callback) {
+    db.all("SELECT imgID, imgPath, likeNum FROM " + imgTable + " WHERE userID=?", userID,  function(err, rows) {
+        if( err ){
+            util.log("search my imgPath wrong : select img");
+            callback(null);
+        }
+        else{
+            if( rows.length>0 ){
+                var imgPaths = [];
+                var index = 0;
+                var imgPath = {};
+                rows.forEach(function (row) {
+                    imgPath = {"imgID":row.imgID, "imgPath":row.imgPath, "likeNum":row.likeNum};
+                    imgPaths[index] = imgPath;
+                    index++;
+                });
                 callback( imgPaths );
             }
             else{
                 util.log("search my imgPath wrong : no img");
-                // return JSON.stringify({userLogo:deafultLogo});
                 callback("none");
             }
         }
@@ -138,12 +280,10 @@ exports.selectMyImageNames = function (userID, callback) {
     db.all("SELECT imgName FROM " + imgTable + " WHERE userID=?", userID,  function(err, rows) {
         if( err ){
             util.log("search my imgName wrong : select img");
-            // return JSON.stringify({userLogo:deafultLogo});
             callback(null);
         }
         else{
             if( rows.length>0 ){
-                // util.log( "databse : " + JSON.stringify(rows) );
                 var imgNames = [];
                 var index = 0;
                 rows.forEach(function (row) {
@@ -154,34 +294,49 @@ exports.selectMyImageNames = function (userID, callback) {
             }
             else{
                 util.log("search my imgName wrong : no img");
-                // return JSON.stringify({userLogo:deafultLogo});
                 callback([]);
             }
         }
     });
 };
 
+exports.deleteMyImage = function (userID, imgID, callback) {
+    db.run("DELETE FROM " + imgTable + " WHERE userID=? and imgID=?", userID, imgID, function (err) {
+        var status = true;
+        if( err ){
+            status = false;
+            util.log(userID + " fail to delete img " + imgID);
+        }
+        else{
+            status = true;
+            util.log(userID + " succeed deleting img " + imgID);
+        }
+        var result = {"status":status};
+        callback( result );
+    })
+};
+
 exports.selectImagesFuzzily = function (keyWord, callback) {
     db.all("SELECT imgPath FROM " + imgTable + " WHERE imgName LIKE '%" + keyWord + "%'",  function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
-            // return JSON.stringify({userLogo:deafultLogo});
-            callback(null);
+            callback(false);
         }
         else{
             if( rows.length>0 ){
-                // util.log( "databse : " + JSON.stringify(rows) );
-                var imgPaths = "";
+                var imgPaths = [];
+                var index = 0;
+                var imgPath = {};
                 rows.forEach(function (row) {
-                    imgPaths += row.imgPath + ";";
+                    imgPath = {"imgID":row.imgID, "imgPath":row.imgPath};
+                    imgPaths[index] = imgPath;
+                    index++;
                 });
-                imgPaths.substr(0,imgPaths.length-1);
                 callback( imgPaths );
             }
             else{
                 util.log("search img wrong : no img");
-                // return JSON.stringify({userLogo:deafultLogo});
-                callback(null);
+                callback(false);
             }
         }
     });
@@ -212,4 +367,5 @@ exports.insertImage = function (userID, imgDescription, imgName) {
         }
     })
 };
+
 

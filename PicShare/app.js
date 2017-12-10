@@ -9,6 +9,7 @@ var session = require('express-session');
 var util = require('util');
 var index = require('./routes/index');
 var sign = require('./routes/sign');
+var info = require('./routes/info');
 
 var ejs = require('ejs');
 var app = express();
@@ -48,6 +49,7 @@ app.use( function (req, res, next) {
 });
 app.use( '/', index );
 app.use( '/', sign );
+app.use( '/', info );
 app.use( '/logout', function (req, res) {
     delete userOnline[req.session.user];
     req.session.logged_in = false;

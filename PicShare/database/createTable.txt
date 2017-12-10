@@ -15,3 +15,9 @@ CREATE TABLE IF NOT EXISTS img (
     imgName VARCHAR(255),
     imgRank INTEGER
     );
+
+CREATE TABLE IF NOT EXISTS follow (
+    followID VARCHAR(30) PRIMARY KEY,
+    followerID INTEGER,
+    followedID INTEGER
+    );

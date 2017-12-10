@@ -25,20 +25,51 @@ router.route('/indexMine')
         res.render('index/indexMine');
     });
 
+router.route('/indexFollow')
+    .get(function(req, res, next) {
+        res.render('index/indexFollow');
+    });
+
 router.route('/userLogo')
     .get(function (req, res, next) {
         var userID = userOnline[req.session.user];
         sqlite.selectUserLogo(userID, function(data) {
-            // util.log('logic get logo path : ' + data.userLogo);
             res.send( data );
         });
 });
 
 router.route('/hotImages')
     .get(function (req, res, next) {
-        sqlite.selectHotImages(function (data) {
-            // util.log( " logic imagePaths : " + data);
-            res.send( data );
+        var userID = userOnline[req.session.user];
+        sqlite.selectHotImages(userID, function (data) {
+            if( data ){
+                res.send( JSON.stringify(data) );
+            }
+            else {
+                res.send( false );
+            }
+        })
+    });
+
+router.route('/followImages')
+    .get(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        sqlite.selectFollowImages(userID, function (data) {
+            if( data ){
+                res.send( JSON.stringify(data) );
+            }
+            else {
+                res.send( false );
+            }
+        })
+    });
+
+router.route('/goodImage')
+    .post(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        var imgID = req.body.imgID;
+        sqlite.updateImageLikeNum(userID, imgID, function (result) {
+            res.send( JSON.stringify(result) );
         })
     });
 
@@ -46,14 +77,23 @@ router.route('/myImages')
     .get(function (req, res, next) {
         var userID = userOnline[req.session.user];
         sqlite.selectMyImagePaths(userID, function (data) {
-            res.send( data );
+            if( data ){
+                res.send( JSON.stringify(data) );
+            }
+            else {
+                res.send( false );
+            }
         })
     });
 
-// router.route('/uploadImg')
-//     .get(function (req, res, next) {
-//         res.render('index/uploadImg');
-//     });
+router.route('/delMyImage')
+    .post(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        var imgID = req.body.imgID;
+        sqlite.deleteMyImage(userID, imgID, function (result) {
+            res.send( JSON.stringify(result) );
+        })
+    });
 
 router.route('/uploadImage')
     .post(function (req, res, next) {
@@ -66,11 +106,13 @@ router.route('/uploadImage')
         form.parse(req, function (err, fields, files) {
             sqlite.selectMyImageNames(userID, function (data) {
                 var message = "";
+                var status = false;
+                var imgPath = "";
                 if( !data ){
                     message = "Sorry, fail to upload picture!";
-                    // res.send( JSON.stringify({message: message}) );
-                    res.send( message );
-                    return;
+                    status = false;
+                    var result = {"status": status, "message": message};
+                    res.send( JSON.stringify(result) );
                 }
                 else {
                     var exist = false;
@@ -79,14 +121,17 @@ router.route('/uploadImage')
                             if( data[i] == files[item].name ) {
                                 exist = true;
                                 message = "Picture has existed, please choose again!";
-                                // res.send( JSON.stringify({message: message}) );
-                                res.send( message );
+                                status = false;
                                 util.log(message);
-                                return;
+                                break;
                             }
                         }
                     }
-                    if( !exist ){
+                    if( exist ){
+                        var result = {"status": status, "message": message};
+                        res.send( JSON.stringify(result) );
+                    }
+                    else {
                         form.uploadDir = uploadDir;
                         for(item in files) {
                             var oldname = files[item].path;
@@ -95,17 +140,18 @@ router.route('/uploadImage')
                                 if (err) {
                                     util.log('upload image: fs.rename wrong');
                                     message = "Sorry, fail to upload picture!";
-                                    return;
+                                    status = false;
                                 }
                                 else {
                                     util.log(userID + ' upload image ' + files[item].name + ' successfully');
                                     message = "Congratulations! Success!";
+                                    status = true;
+                                    imgPath = "/images/" + userID + "/" + files[item].name;
+                                    var result = {"status": status, "message": message, "imgPath":imgPath};
+                                    res.send( JSON.stringify(result) );
+                                    sqlite.insertImage(userID, imgDescription, files[item].name);
                                 }
-                                // res.send( JSON.stringify({message: message}) );
-                                res.send( message );
-                                util.log(message);
                             });
-                            sqlite.insertImage(userID, imgDescription, files[item].name);
                         }
                     }
                 }
@@ -117,31 +163,14 @@ router.route('/searchImage')
     .post(function (req, res, next) {
         var keyWord = req.body.keyWord;
         sqlite.selectImagesFuzzily(keyWord, function (data) {
-            res.send( data );
+            if( data ){
+                res.send( JSON.stringify(data) );
+            }
+            else {
+                res.send( false );
+            }
         })
     });
 
-router.route('/profile')
-    .get(function (req, res, next) {
-        res.render('profile');
-});
-
-router.route('/userInfo')
-    .get(function (req, res, next) {
-        var userID = userOnline[req.session.user];
-        sqlite.selectUserInfo(userID, function(data) {
-            res.send( data );
-        });
-    });
-
-router.route('/changeInfo')
-    .post(function (req, res, next) {
-        var userID = userOnline[req.session.user];
-        var userName = req.body.userName;
-        var userEmail = req.body.userEmail;
-        sqlite.updateUserInfo(userID, userName, userEmail, function (status) {
-            res.send( {status:status} );
-        })
-});
 
 module.exports = router;

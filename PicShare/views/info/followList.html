@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <meta http-equiv="Page-Enter" content= "revealTrans(Duration=5.0,Transition=11)">
+    <link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/info/followList.css">
+</head>
+<body>
+    <!-- 全局顶部导航栏 -->
+    <!-- 标明为导航容器 -->
+    <nav class="nav_fix_top" role="navigation">
+        <div class="width-limit">
+            <!-- 左上方 logo -->
+            <a class="logo" target="_self" href="indexFind">
+                <img src="images/PicShare.png" title="主页">
+            </a>
+
+            <!-- 右上角 -->
+            <!-- 注销 -->
+            <a class="btn logout" href="/logout">注销</a>
+            <!-- 隐形块 -->
+            <div class="invisiblebtn"></div>
+
+            <!--下拉菜单-->
+            <div class="div_lis" id="div_lis">
+                <ul>
+                    <li>
+                        <a class="userLogoLink" id="userLogoLink" href="#">
+                            <img class="userLogo" id="userLogo">
+                        </a>
+                        <div id="a_div" class="a_div">
+                            <a href="profile">个人信息</a>
+                            <a href="#">关注列表</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 隐形块 -->
+            <div class="invisiblebtn"></div>
+
+            <!-- 搜索用户 -->
+            <div class="div_search_container">
+                <form role="form" accept-charset="UTF-8" method="get" onsubmit="return false">
+                    <input class="search_input" id="searchInput" type="text"
+                           name="keyWord" placeholder="搜索用户"/>
+                    <input class="search_btn" id="searchLogo"
+                           type="submit" value="🔍"/>
+                </form>
+            </div>
+
+            <input class="btn tellInput" id="tellInput" value="关注列表" disabled readonly />
+
+        </div>
+    </nav>
+
+    <!-- ----------------------- 导航栏以下 ----------------------- -->
+
+    <div class="coolBackground" id="coolBackgroundDiv">
+        <canvas id="display" style="position: fixed"></canvas>
+        <div id="blachole" style="position: fixed"></div>
+
+        <div class="profile_page" id="followListInfoShow">
+            <div class="main" id="followMain">
+                <div class="info_frag">
+                    <input class="inputCommon IDInput" value="账号" readonly>
+                    <input class="inputCommon nameInput" value="昵称" readonly>
+                    <input class="inputCommon nameInput" value="邮箱" readonly>
+                    <button class="inputCommon unFollowBtn" id="noFollowTell" style="visibility: hidden;" disabled></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile_page" style="display: none" id="searchFollowListInfoShow">
+            <button class="backToFollowListBtn" id="searchBackToFollowListBtn">返回</button>
+            <div class="main" id="searchFollowMain">
+                <div class="info_frag">
+                    <input class="inputCommon IDInput" value="账号" readonly>
+                    <input class="inputCommon nameInput" value="昵称" readonly>
+                    <input class="inputCommon nameInput" value="邮箱" readonly>
+                    <button class="inputCommon unFollowBtn" style="visibility: hidden;" disabled></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/md5.min.js"></script>
+    <script src="javascripts/jquery/jquery-3.2.1.js"></script>
+    <script src="javascripts/jquery/jquery-ui.min.js"></script>
+    <script src="javascripts/index/constellation.js"></script>
+
+    <!-- 初始化界面 -->
+    <script>
+        $(function () {
+            $.get('userInfo', function (data) {
+                if( data ){
+                    $("#userLogo").attr("src", data.userLogo);
+                    $("#userBigLogo").attr("src", data.userLogo);
+                    $("#userID").val(data.userID);
+                    $("#userName").val(data.userName);
+                    $("#userEmail").val(data.userEmail);
+                }
+                else {
+                    $.post('logout');
+                }
+            });
+            $.get('followInfo', function (data) {
+                if( data ){
+                    var followInfo = $.parseJSON( data );
+                    if( followInfo.length>0 ){
+                        for(var i=0; i<followInfo.length; i++){
+                            var info = followInfo[i];
+                            var infoDiv = "<div class='info_frag' id='"+info.userID+"_info_div'>" +
+                                "<input class='inputCommon IDInput' value='" + info.userID + "' readonly />" +
+                                "<input class='inputCommon nameInput' value='" + info.userName + "' readonly />" +
+                                "<input class='inputCommon nameInput' value='" + info.userEmail + "' readonly />" +
+                                "<button class='inputCommon unFollowBtn' id='" + info.userID + "' onclick='cancelFollow(this)'>取消关注</button>" +
+                                "</div>";
+                            $("#followMain").append(infoDiv);
+                        }
+                    }
+                    else{
+                        $("#noFollowTell").show();
+                        $("#noFollowTell").text('无关注');
+                        $("#noFollowTell").css('color', '#ff6b77');
+                    }
+                }
+                else{
+                    $("#noFollowTell").show();
+                    $("#noFollowTell").text('无关注');
+                    $("#noFollowTell").css('color', '#ff6b77');
+                }
+            })
+        });
+    </script>
+
+    <!-- 按钮动作监听 -->
+    <script>
+
+        function cancelFollow(obj) {
+            var followedID = $(obj).attr('id');
+            var data = {"followedID":followedID};
+            $.post('cancelFollow', data, function (res) {
+                var result = $.parseJSON( res );
+                if( result.status ){
+                    $("#"+followedID+"_info_div").remove();
+                }
+                else{
+                    alert('抱歉，关注失败。。。');
+                }
+            });
+        }
+
+        var infoSave = [];
+        var index = 0;
+        $("#searchLogo").click(function () {
+            $("#searchImageBox").empty();
+            var keyWord = $("#searchInput").val().toString();
+            if( keyWord!==undefined && keyWord.length>0 ){
+                var data = {"keyWord": keyWord};
+                $.post('searchUser', data, function (data) {
+                    $("#followListInfoShow").hide();
+                    $("#searchFollowListInfoShow").show();
+                    $("#searchFollowMain").empty();
+                    $("#tellInput").val("搜索结果");
+                    if (data) {
+                        infoSave = [];
+                        index = 0;
+                        var leadInfo = "<div class='info_frag'>" +
+                            "<input class='inputCommon IDInput' value='账号' readonly>" +
+                            "<input class='inputCommon nameInput' value='昵称' readonly>" +
+                            "<input class='inputCommon nameInput' value='邮箱' readonly>" +
+                            "<button class='inputCommon unFollowBtn' style='visibility: hidden;' disabled></button>" +
+                            "</div>";
+                        $("#searchFollowMain").append(leadInfo);
+
+                        var usersInfo = $.parseJSON(data);
+                        for (var i = 0; i < usersInfo.length; i++) {
+                            var info = usersInfo[i];
+                            var infoDiv = "<div class='info_frag' id='search_"+info.userID+"_info_div'>" +
+                                "<input class='inputCommon IDInput' value='" + info.userID + "' readonly />" +
+                                "<input class='inputCommon nameInput' value='" + info.userName + "' readonly />" +
+                                "<input class='inputCommon nameInput' value='" + info.userEmail + "' readonly />" +
+                                "<button class='inputCommon unFollowBtn' id='" + info.userID + "_" + index + "' onclick='followUser(this)'>关注</button>" +
+                                "</div>";
+                            infoSave[index] = {"userID":info.userID, "userName":info.userName, "userEmail":info.userEmail};
+                            index++;
+                            $("#searchFollowMain").append(infoDiv);
+                        }
+                    }
+                    else{
+                        var infoDiv = "<div class='info_frag'><h2>无相关用户</h2></div>";
+                        $("#searchFollowMain").append(infoDiv);
+                    }
+                });
+            }
+            $("#searchInput").val("");
+            $("#searchKeyWord").val(keyWord);
+        });
+
+        function followUser(obj) {
+            var temp1 = $(obj).attr('id');
+            var temp2 = temp1.split("_");
+            var indexTemp = temp2[1];
+            var info = infoSave[indexTemp];
+            var followedID = info.userID;
+            var data = {"followedID":followedID};
+            $.post('followUser', data, function (res) {
+                var result = $.parseJSON( res );
+                if( result.status ){
+                    $("#search_" + followedID + "_info_div").remove();
+                    var infoDiv = "<div class='info_frag' id='"+info.userID+"_info_div'>" +
+                        "<input class='inputCommon IDInput' value='" + info.userID + "' readonly />" +
+                        "<input class='inputCommon nameInput' value='" + info.userName + "' readonly />" +
+                        "<input class='inputCommon nameInput' value='" + info.userEmail + "' readonly />" +
+                        "<button class='inputCommon unFollowBtn' id='" + info.userID + "' onclick='cancelFollow(this)'>取消关注</button>" +
+                        "</div>";
+                    $("#followMain").append(infoDiv);
+                }
+                else{
+                    alert('抱歉，关注失败。。。');
+                }
+            });
+        }
+
+        $("#searchBackToFollowListBtn").click(function () {
+            $("#followListInfoShow").show();
+            $("#searchFollowListInfoShow").hide();
+            $("#tellInput").val("关注列表");
+        });
+    </script>
+
+    <!-- 炫酷的背景 -->
+    <script src="javascripts/index/coolBackground.js"></script>
+
+    <!-- 用户信息下拉菜单 -->
+    <script src="javascripts/index/logoShowInfo.js"></script>
+</body>
+</html>
