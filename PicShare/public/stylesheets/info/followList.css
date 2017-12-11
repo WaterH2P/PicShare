@@ -46,24 +46,23 @@ div {
     position: relative;
     margin: 10px 20px;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     height: 30px;
     background: transparent;
     border: 1px solid transparent;
+    border-right: 1px solid #0b88ff;
 }
 
 .profile_page .main .info_frag .IDInput{
-    text-align: center;
-    font-size: 20px;
     width: 80px;
-    border-right: 1px solid #0b88ff;
 }
 
 .profile_page .main .info_frag .nameInput{
-    text-align: center;
-    font-size: 20px;
-    width: 200px;
-    border-right: 1px solid #0b88ff;
+    width: 170px;
+}
+
+.profile_page .main .info_frag .emailInput{
+    width: 240px;
 }
 
 .profile_page .main .info_frag .unFollowBtn{

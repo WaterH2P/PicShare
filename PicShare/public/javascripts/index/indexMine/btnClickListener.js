@@ -1,5 +1,6 @@
 
 $("#searchLogo").click(function () {
+    $("#ShowAllChangeSignBtn").hide();
     $("#searchImageBox").empty();
     var keyWord = $("#searchInput").val().toString();
     if( keyWord!==undefined && keyWord.length>0 ){
@@ -13,7 +14,10 @@ $("#searchLogo").click(function () {
                 for (var i = 0; i < imgInfos.length; i++) {
                     var imgInfo = imgInfos[i];
                     if ( imgInfo.imgPath ) {
-                        showImage( imgInfo, 'searchImageBox', 'searchMyBtn-', 'searchMyDiv-');
+                        var pre = {"divIDPrex":"searchMyDiv-", "showSignPrex":"searchSignShow-",
+                            "delBtnIDPrex":"searchMyBtn-", "changeBtnIDPrex":"searchChangeBtn-",
+                            "submitChangeBtnIDPrex":"searchSubmitChangeBtn-"};
+                        showImage( imgInfo, "searchImageBox", pre);
                     }
                 }
             }
@@ -70,6 +74,7 @@ $("#searchBackToMyImageBtn").click(function () {
     $("#searchImageBox").empty();
     $("#imageShow").show();
     $("#searchImageShow").hide();
+    $("#ShowAllChangeSignBtn").show();
 });
 
 
@@ -106,3 +111,70 @@ function deleteImage(obj) {
         }
     })
 }
+
+function changeSign(obj) {
+    $(".justForFindBtnChangeSign").hide();
+    var temp1 = $(obj).attr('id');
+    var temp2 = temp1.split('-');
+    var IDValue = temp2[1];
+    $("#findSubmitChangeBtn-"+IDValue).show();
+    $("#signShow-"+IDValue).removeAttr("readonly");
+    $("#signShow-"+IDValue).css("background", "transparent");
+    $("#signShow-"+IDValue).css("border", "1px solid #00b7ee");
+}
+
+function submitChange(obj) {
+    var temp1 = $(obj).attr('id');
+    var temp2 = temp1.split('-');
+    var IDValue = temp2[1];
+    var newSign = $("#signShow-"+IDValue).val();
+    var data = {"imgID":IDValue, "imgSign":newSign};
+    $.post('changeImageSign', data, function (res) {
+        var result = $.parseJSON( res );
+        if( result.status ){
+            $("#signShow-"+IDValue).attr("readonly", "readonly");
+            $("#signShow-"+IDValue).css("background", "#00b7ee");
+            $("#signShow-"+IDValue).css("border", "transparent");
+            $("#findSubmitChangeBtn-"+IDValue).hide();
+            $(".justForFindBtnChangeSign").show();
+        }
+        else{
+            alert("修改失败，情况不详！");
+            $("#signShow-"+IDValue).attr("disabled", "readonly");
+            $("#signShow-"+IDValue).css("background", "#00b7ee");
+            $("#signShow-"+IDValue).css("border", "transparent");
+            $("#findSubmitChangeBtn-"+IDValue).hide();
+            $(".justForFindBtnChangeSign").show();
+        }
+    })
+}
+
+
+
+$("#showAllDelImageBtn").click(function () {
+    $("#showAllDelImageBtn").hide();
+    $(".justForFindBtnDel").show();
+    $("#delImageBackBtn").show();
+    $("#ShowAllChangeSignBtn").hide();
+});
+
+$("#delImageBackBtn").click(function () {
+    $("#showAllDelImageBtn").show();
+    $(".justForFindBtnDel").hide();
+    $("#delImageBackBtn").hide();
+    $("#ShowAllChangeSignBtn").show();
+});
+
+$("#ShowAllChangeSignBtn").click(function () {
+    $("#showAllDelImageBtn").hide();
+    $("#ShowAllChangeSignBtn").hide();
+    $(".justForFindBtnChangeSign").show();
+    $("#changeSignBackBtn").show();
+});
+
+$("#changeSignBackBtn").click(function () {
+    $("#showAllDelImageBtn").show();
+    $("#ShowAllChangeSignBtn").show();
+    $(".justForFindBtnChangeSign").hide();
+    $("#changeSignBackBtn").hide();
+});

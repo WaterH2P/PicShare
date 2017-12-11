@@ -404,9 +404,9 @@ nav form .search_btn {
     font-family: Georgia,Times New Roman,Times,Songti SC,serif;
     display: inline-block;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
     width: 20%;
-    height: 20%;
+    height: 18%;
     border: 1px solid transparent;
     padding: 5px;
 }
@@ -453,6 +453,16 @@ nav form .search_btn {
     float: left;
 }
 
+.imageBox .imgList .SignInput {
+    margin: 5px;
+    margin-left: 15px;
+    width: 30%;
+    height: 15%;
+    float: left;
+    background: #00b7ee;
+    border-radius: 3px;
+}
+
 .imagePage {
     width: 480px;
     height: 30px;
@@ -472,7 +482,6 @@ nav form .search_btn {
 .imagePage a.active {
     background: red;
 }
-
 
 
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 上传图片 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */

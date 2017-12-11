@@ -4,19 +4,20 @@ $("#searchLogo").click(function () {
     var keyWord = $("#searchInput").val().toString();
     if( keyWord!==undefined && keyWord.length>0 ){
         var data = {"keyWord": keyWord};
-        $.post('searchImage', data, function (data) {
+        $.post('searchFollowImage', data, function (data) {
             if (data) {
-                var imgPaths = $.parseJSON( data );
+                var imgInfos = $.parseJSON( data );
                 $("#searchImageShow").show();
                 $("#imageShow").hide();
-                for (var i = 1; i < imgPaths.length; i++) {
-                    var imgPath = imgPaths[i];
-                    if ( imgPath.imgPath ) {
-                        var divImg = "<div class='imgList' id='findSearch-"+ imgPath.imgID + "'>" +
-                            "<img src='" + imgPath.imgPath + "'/>" +
-                            "<button id='findSearchBtn-"+ imgPath.imgID + "' class='goodBtn' onclick='giveImageGood(this, \"searchlike-\")'>👍</button>" +
-                            "<button id='searchLike-"+ imgPath.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
-                            "<input class='CommonInput RightInput' value='by " + imgPath.userID + "' readonly/>" +
+                for (var i = 1; i < imgInfos.length; i++) {
+                    var imgInfo = imgInfos[i];
+                    if ( imgInfo.imgPath ) {
+                        var divImg = "<div class='imgList' id='findSearch-"+ imgInfo.imgID + "'>" +
+                            "<img src='" + imgInfo.imgPath + "'/>" +
+                            "<button id='findSearchBtn-"+ imgInfo.imgID + "' class='goodBtn' onclick='giveImageGood(this, \"searchlike-\")'>👍</button>" +
+                            "<button id='searchLike-"+ imgInfo.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
+                            "<input class='CommonInput SignInput' value='" + imgInfo.imgSign + "' readonly/>" +
+                            "<input class='CommonInput RightInput' value='by " + imgInfo.userID + "' readonly/>" +
                             "</div>";
                         $("#searchImageBox").append(divImg);
                     }

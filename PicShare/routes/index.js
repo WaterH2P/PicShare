@@ -192,5 +192,28 @@ router.route('/searchImage')
         })
     });
 
+router.route('/searchFollowImage')
+    .post(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        var keyWord = req.body.keyWord;
+        sqlite.selectFollowImagesFuzzily(userID, keyWord, function (data) {
+            if( data ){
+                res.send( JSON.stringify(data) );
+            }
+            else {
+                res.send( false );
+            }
+        })
+    });
+
+router.route('/changeImageSign')
+    .post(function (req, res, next) {
+        var userID = userOnline[req.session.user];
+        var imgID = req.body.imgID;
+        var imgSign = req.body.imgSign;
+        sqlite.updateImageSign(userID, imgID, imgSign, function (result) {
+            res.send( JSON.stringify(result) );
+        })
+    });
 
 module.exports = router;

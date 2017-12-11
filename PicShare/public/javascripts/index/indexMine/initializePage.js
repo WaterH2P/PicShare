@@ -11,7 +11,10 @@ $(function () {
                 for (var i = 0; i < imgInfos.length; i++) {
                     var imgInfo = imgInfos[i];
                     if ( imgInfo.imgPath ) {
-                        showImage( imgInfo, 'imageBox', 'findMyBtn-', 'findMyDiv-');
+                        var pre = {"divIDPrex":"findMyDiv-", "showSignPrex":"signShow-",
+                            "delBtnIDPrex":"findMyBtn-", "changeBtnIDPrex":"findChangeBtn-",
+                            "submitChangeBtnIDPrex":"findSubmitChangeBtn-"};
+                        showImage( imgInfo, "imageBox", pre);
                     }
                 }
             }
@@ -25,11 +28,14 @@ $(function () {
 });
 
 
-function showImage(imgInfo, divID, btnIDPrex, divIDPrex) {
-    var divImg = "<div class='imgList' id='" + divIDPrex + imgInfo.imgID +"'>" +
+function showImage(imgInfo, divID, pre) {
+    var divImg = "<div class='imgList' id='" + pre.divIDPrex + imgInfo.imgID +"'>" +
         "<img src='" + imgInfo.imgPath + "'/>" +
         "<input class='CommonInput LeftInput' value='❤️ " + imgInfo.likeNum + "' readonly/>" +
-        "<button id='" + btnIDPrex + imgInfo.imgID +"' class='delBtn' onclick='deleteImage(this)'>删除</button>" +
+        "<input class='CommonInput SignInput' id='" + pre.showSignPrex + imgInfo.imgID + "' value='" + imgInfo.imgSign + "' readonly/>" +
+        "<button class='justForFindBtnDel delBtn' id='" + pre.delBtnIDPrex + imgInfo.imgID +"' style='display:none' onclick='deleteImage(this)'>删除</button>" +
+        "<button class='justForFindBtnChangeSign delBtn' id='" + pre.changeBtnIDPrex + imgInfo.imgID +"' style='display:none' onclick='changeSign(this)'>修改</button>" +
+        "<button class='delBtn' id='" + pre.submitChangeBtnIDPrex + imgInfo.imgID +"' style='display:none' onclick='submitChange(this)'>提交</button>" +
         "</div>";
     $("#"+divID).append(divImg);
 }

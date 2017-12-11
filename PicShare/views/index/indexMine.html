@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>PicShare</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/index/indexMine.css">
 </head>
 
 <body>
@@ -69,6 +70,7 @@
         <!-- 搜索照片结果展示部分 -->
         <div class="imgContainer" style="display: none" id="searchImageShow">
             <div class="KeyWordLabel">
+                <button class="backToMyImageBtn uploadBtn" id="searchBackToMyImageBtn">返回</button>
                 <input class="searchKeyWord" type="text" id="searchKeyWord" readonly/>
                 <h2>搜索结果</h2>
             </div>
@@ -93,6 +95,15 @@
                 <img id="uploadImagePreview" src="" width="110px" height="110px"
                      style="display: inline-block;padding: 5px;border:1px solid #fff" />
             </div>
+        </div>
+
+        <!-- 右边修改按钮 -->
+        <div class="div_btn_fix">
+            <button id="showAllDelImageBtn">删除照片</button>
+            <button id="delImageBackBtn" style="display: none">删除完毕</button>
+            <button style="visibility: hidden"></button>
+            <button id="ShowAllChangeSignBtn">修改标签</button>
+            <button id="changeSignBackBtn" style="display: none">修改完毕</button>
         </div>
     </div>
 
