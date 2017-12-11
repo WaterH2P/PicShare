@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>PicShare Sign In</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/sign.css">
+</head>
+
+<body>
+	<div class="sign">
+		<div class="logo">
+			<!-- 返回主页 -->
+			<a target="_self" href="">
+				<img src="images/PicShare.png">
+			</a>
+		</div>
+
+		<div class="main">
+			<h4 class="title">
+				<div id="aSign">
+					<a class="active" href="signIn">登录</a>
+					<b>·</b>
+					<a href="signUp">注册</a>
+				</div>
+                <div id="aShowStatus" style="display: none">
+                    <a class="active">登陆情况</a>
+                </div>
+			</h4>
+
+			<div>
+				<form role="form" id="signInForm" accept-charset="utf-8" method="post" onsubmit="return false">
+					<!-- 登录名输入框 -->
+                    <input class="input_prepend input_up_prepend" placeholder="帐号"
+                           type="text" name="userID" id="userID" required/>
+
+					<!-- 登录密码输入框 -->
+                    <input class="input_prepend input_down_prepend" placeholder="密码"
+                           type="password" name="userPassword" id="userPassword" required/>
+
+					<!-- 登录 -->
+					<input type="submit" id="signInSubmit" name="signInSubmit" value="登录" class="sign_button" />
+				</form>
+                <div id="showStatusDiv" style="display: none">
+                    <input class="input_prepend" style="margin-bottom: 50px;padding: 0;text-align: center;"
+                           type="text" id="signInStatusShow" readonly />
+                    <a href="../index" id="goToIndex">
+                        <input type="submit" id="goToIndexBtn" class="sign_button"/>
+                    </a>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    <script src="javascripts/other/md5.min.js"></script>
+	<script src="javascripts/jquery/jquery-3.2.1.js"></script>
+
+    <!-- 按钮动作监听 -->
+    <script src="javascripts/sign/signIn/btnClickListener.js"></script>
+
+</body>
+
+</html>

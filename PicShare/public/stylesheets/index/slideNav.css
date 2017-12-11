@@ -1,0 +1,139 @@
+li {
+	list-style: none
+}
+
+a {
+	text-decoration: none;
+}
+
+.navMenubox {
+    float: left;
+	width: 190px;
+	height: 500px;
+	background: #000000;
+	margin: 0 auto;
+	margin-top: 10px;
+	overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navMenu-top {
+	padding: 10px;
+	color: #fff;
+	border-bottom: 1px solid rgba(255, 255, 255, .1)
+}
+
+.navMenu{
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.navMenu> li {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.navMenu>li>a {
+	display: block;
+	overflow: hidden;
+	padding-left: 0;
+	line-height: 40px;
+	color: #ABB1B7;
+	transition: all .3s;
+	position: relative;
+	text-decoration: none;
+	font-size: 17px;
+	border-top: 1px solid #222932;
+	border-bottom: 2px solid #191e24;
+}
+
+.navMenu > li:nth-of-type(1)> a {
+	border-top: 1px solid transparent;
+}
+
+.navMenu > li:last-child > a {
+	border-bottom: 1px solid transparent;
+}
+
+.navMenu>li>a>i {
+	font-size: 20px;
+	float: left;
+	font-style: normal;
+	margin: 0 5px;
+}
+
+.navMenu li a .arrow:before {
+	display: block;
+	float: right;
+	margin-top: 1px;
+	margin-right: 10px;
+	font-size: 16px;
+	height: auto;
+	content: "\f105";
+	font-weight: 300;
+	text-shadow: none;
+}
+
+.navMenu li a .arrow.open:before {
+	float: right;
+	margin-top: 1px;
+	margin-right: 10px;
+	display: inline;
+	height: auto;
+	font-size: 16px;
+	content: "\f107";
+	font-weight: 300;
+	text-shadow: none;
+}
+
+.navMenu>li>a.active, .navMenu>li>a:hover {
+	color: #FFF;
+	background: #12181b;
+}
+
+.navMenu>li>ul.sub-menu, .navMenu>li>ul.sub-menu>li>ul.sub-menu {
+	display: none;
+	list-style: none;
+	clear: both;
+	margin: 8px 0 0 10px;
+	padding-bottom: 5px;
+}
+
+.navMenu>li.active > ul.sub-menu, .navMenu>li>ul.sub-menu>li.active >ul.sub-menu {
+}
+
+.navMenu>li>ul.sub-menu li {
+	background: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navMenu>li>ul.sub-menu li>a {
+	display: block;
+	font-size: 16px;
+	line-height: 36px;
+	padding-left: 5px;
+	color: #ABB1B7;
+	clear: both;
+}
+
+.navMenu>li>ul.sub-menu li>a.active, .navMenu>li>ul.sub-menu li>a:hover, .navMenu>li>ul.sub-menu>li.active >a {
+	color: #FFF;
+	background: #12181b;
+}
+
+.icon_1:before {
+	content: "\f0ac";
+}
+
+.icon_2:before {
+	content: "\f0ac";
+}
+
+.icon_3:before {
+	content: "\f0ac";
+}

@@ -9,7 +9,7 @@ var imgTable = 'img';
 var followTable = 'follow';
 
 var db = new sqlite.Database( path.join(__dirname, 'PicShare.db') );
-global.deafultLogo = "/images/user_logos/default.png";
+var deafultLogo = "/images/user_logos/default.png";
 
 exports.addUser = function (userID, userPassword, userName, userEmail) {
     var stmt = db.prepare("INSERT INTO " + userTable + " VALUES(?,?,?,?,?)");
@@ -29,18 +29,20 @@ exports.selectUserLogo = function (userID, callback) {
     db.all("SELECT userLogo FROM " + userTable + " WHERE userID = ?", userID, function(err, rows) {
         if( err ){
             util.log("search logo wrong : select wrong");
-            // return JSON.stringify({userLogo:deafultLogo});
-            callback( {userLogo:deafultLogo} );
+            callback( {"userLogo":deafultLogo} );
         }
         else{
+            var logoPath = "";
             if( rows.length>0 ){
                 util.log("search logo succeed :" + rows[0].userLogo );
-                callback( {userLogo:rows[0].userLogo} );
+                logoPath = rows[0].userLogo;
             }
             else{
                 util.log("search logo wrong : no path");
-                callback( {userLogo:deafultLogo} );
+                logoPath = deafultLogo;
             }
+            var result = {"userLogo":logoPath};
+            callback( result );
         }
     });
 };
@@ -157,7 +159,7 @@ exports.selectUserFuzzily = function (userID, keyWord, callback) {
         "SELECT followedID FROM " + followTable + " WHERE followerID=?)", userID, userID, function(err, rows) {
         if( err ){
             util.log("search follow wrong : select follow");
-            callback(null);
+            callback(false);
         }
         else{
             if( rows.length>0 ){
@@ -173,7 +175,7 @@ exports.selectUserFuzzily = function (userID, keyWord, callback) {
             }
             else{
                 util.log("search follow wrong : no follow");
-                callback(null);
+                callback(false);
             }
         }
     });
@@ -187,15 +189,15 @@ exports.selectHotImages = function (userID, callback) {
         }
         else{
             if( rows.length>0 ){
-                var imgPaths = [];
+                var imgInfos = [];
                 var index = 0;
-                var imgPath = {};
+                var imgInfo = {};
                 rows.forEach(function (row) {
-                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath};
-                    imgPaths[index] = imgPath;
+                    imgInfo = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath};
+                    imgInfos[index] = imgInfo;
                     index++;
                 });
-                callback( imgPaths );
+                callback( imgInfos );
             }
             else{
                 util.log("search img wrong : no img");
@@ -214,15 +216,15 @@ exports.selectFollowImages = function (userID, callback) {
         }
         else{
             if( rows.length>0 ){
-                var imgPaths = [];
+                var imgInfos = [];
                 var index = 0;
-                var imgPath = {};
+                var imgInfo = {};
                 rows.forEach(function (row) {
-                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath};
-                    imgPaths[index] = imgPath;
+                    imgInfo = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath};
+                    imgInfos[index] = imgInfo;
                     index++;
                 });
-                callback( imgPaths );
+                callback( imgInfos );
             }
             else{
                 util.log("search img wrong : no img");
@@ -367,7 +369,7 @@ exports.selectImagesFuzzily = function (keyWord, callback) {
     });
 };
 
-exports.insertImage = function (userID, imgDescription, imgName) {
+exports.insertImage = function (userID, imgDescription, imgName, callback) {
     db.all("SELECT max(imgRank) as maxRank FROM " + imgTable + " WHERE userID=?", userID, function (err, rows) {
         if( err ){
             util.log("fail to select " + userID + " image maxRank");
@@ -384,9 +386,11 @@ exports.insertImage = function (userID, imgDescription, imgName) {
                 imgID, userID, imgPath, imgDescription, likeNum, imgName, maxRank, function(err) {
                     if( err ){
                         util.log(userID + " fail to insert img : " + imgName);
+                        callback({"status":false});
                     }
                     else{
                         util.log(userID + " succeed inserting img : " + imgName);
+                        callback({"status":true, "imgID":imgID, "imgPath":imgPath, "likeNum":likeNum});
                     }
                 });
         }

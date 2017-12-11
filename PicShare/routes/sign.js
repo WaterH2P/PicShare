@@ -9,6 +9,8 @@ var router = express.Router();
 var crypto = require('crypto');
 var sqlite = require('../database/sqlite3');
 
+var IDtxtPath = path.join(__dirname, './ID.txt');
+
 var md5 = crypto.createHash('md5');
 var IDDistance = 5;
 
@@ -16,7 +18,7 @@ var IDDistance = 5;
 
 router.route('/signIn')
     .get(function(req, res) {
-        res.render('signIn');
+        res.render('sign/signIn');
     })
     .post(function (req, res) {
         var userID = req.body.userID;
@@ -26,23 +28,23 @@ router.route('/signIn')
             req.session.logged_in = true;
             req.session.user = identification;
             userOnline[req.session.user] = userID;
-            res.send({status:true});
+            res.send( JSON.stringify({"status":true}) );
         }
         else{
-            res.send({status:false});
+            res.send( JSON.stringify({"status":false}) );
         }
     });
 
 router.route('/signUp')
     .get(function(req, res) {
-        res.render('signUp');
+        res.render('sign/signUp');
     })
     .post(function (req, res) {
         var userPassword = req.body.userPassword;
         var userName = req.body.userName;
         var userEmail = req.body.userEmail;
         var userID = signUp(userPassword, userName, userEmail);
-        res.send({status:true, userID:userID});
+        res.send( JSON.stringify({"status":true, "userID":userID}) );
     });
 
 module.exports = router;

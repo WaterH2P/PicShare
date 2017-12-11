@@ -17,26 +17,27 @@ router.route('/')
 
 router.route('/indexFind')
     .get(function(req, res, next) {
-        res.render('index/indexFind');
+        var userID = userOnline[req.session.user];
+        sqlite.selectUserLogo(userID, function(data) {
+            res.render('index/indexFind',data);
+        });
 });
 
 router.route('/indexMine')
     .get(function(req, res, next) {
-        res.render('index/indexMine');
+        var userID = userOnline[req.session.user];
+        sqlite.selectUserLogo(userID, function(data) {
+            res.render('index/indexMine',data);
+        });
     });
 
 router.route('/indexFollow')
     .get(function(req, res, next) {
-        res.render('index/indexFollow');
-    });
-
-router.route('/userLogo')
-    .get(function (req, res, next) {
         var userID = userOnline[req.session.user];
         sqlite.selectUserLogo(userID, function(data) {
-            res.send( data );
+            res.render('index/indexFollow',data);
         });
-});
+    });
 
 router.route('/hotImages')
     .get(function (req, res, next) {
@@ -153,12 +154,22 @@ router.route('/uploadImage')
                                 }
                                 else {
                                     util.log(userID + ' upload image ' + files[item].name + ' successfully');
-                                    message = "Congratulations! Success!";
-                                    status = true;
-                                    imgPath = "/images/" + userID + "/" + files[item].name;
-                                    var result = {"status": status, "message": message, "imgPath":imgPath};
-                                    res.send( JSON.stringify(result) );
-                                    sqlite.insertImage(userID, imgDescription, files[item].name);
+
+                                    // var result = {"status": status, "message": message, "imgPath":imgPath};
+                                    sqlite.insertImage(userID, imgDescription, files[item].name, function (result) {
+                                        if( result.status ){
+                                            message = "Congratulations! Success!";
+                                            status = true;
+                                            imgPath = "/images/" + userID + "/" + files[item].name;
+                                        }
+                                        else {
+                                            message = "Sorry, fail to upload picture!";
+                                            status = false;
+                                        }
+                                        result.status = status;
+                                        result.message = message;
+                                        res.send( JSON.stringify(result) );
+                                    });
                                 }
                             });
                         }

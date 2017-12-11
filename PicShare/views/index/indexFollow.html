@@ -5,177 +5,98 @@
     <meta charset="utf-8">
     <title>PicShare</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/jquery/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/img/imgChange.css">
 </head>
 
 <body>
-<!-- 全局顶部导航栏 -->
-<!-- 标明为导航容器 -->
-<nav class="nav_fix_top" role="navigation">
-    <div class="width-limit">
-        <!-- 左上方 logo -->
-        <a class="logo" target="_self" href="">
-            <img src="images/PicShare.png" title="主页">
-        </a>
+    <!-- 全局顶部导航栏 -->
+    <!-- 标明为导航容器 -->
+    <nav class="nav_fix_top" role="navigation">
+        <div class="width-limit">
+            <!-- 左上方 logo -->
+            <a class="logo" target="_self" href="">
+                <img src="images/PicShare.png" title="主页">
+            </a>
 
-        <!-- 右上角 -->
-        <!-- 注销 -->
-        <a class="btn logout" href="/logout">注销</a>
-        <!-- 隐形块 -->
-        <div class="invisiblebtn"></div>
+            <!-- 右上角 -->
+            <!-- 注销 -->
+            <a class="btn logout" href="/logout">注销</a>
+            <!-- 隐形块 -->
+            <div class="invisiblebtn"></div>
 
-        <!--<a class="userLogoLink" id="userLogoLink" href="profile">-->
-        <!--<img class="userLogo" id="userLogo" title="个人信息">-->
-        <!--</a>-->
+            <!--<a class="userLogoLink" id="userLogoLink" href="profile">-->
+            <!--<img class="userLogo" id="userLogo" title="个人信息">-->
+            <!--</a>-->
 
-        <!--下拉菜单-->
-        <div class="div_lis" id="div_lis">
-            <ul>
-                <li>
-                    <a class="userLogoLink" id="userLogoLink" href="#">
-                        <img class="userLogo" id="userLogo">
-                    </a>
-                    <div id="a_div">
-                        <a href="profile">个人信息</a>
-                        <a href="followList">关注列表</a>
-                    </div>
-                </li>
-            </ul>
+            <!--下拉菜单-->
+            <div class="div_lis" id="div_lis">
+                <ul>
+                    <li>
+                        <a class="userLogoLink" id="userLogoLink" href="#">
+                            <img class="userLogo" id="userLogo" src="<%=userLogo%>">
+                        </a>
+                        <div id="a_div">
+                            <a href="profile">个人信息</a>
+                            <a href="followList">关注列表</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="div_frag_container">
+                <a class="frag fragUnactive" id="fragFind" href="indexFind">发现</a>
+                <a class="frag fragActive" id="" href="#">好友</a>
+                <a class="frag fragUnactive" id="fragMine" href="indexMine">我的</a>
+            </div>
+
+            <div class="div_search_container">
+                <form role="form" accept-charset="UTF-8" method="get" onsubmit="return false">
+                    <input class="search_input" id="searchInput" type="text"
+                           name="keyWord" placeholder="搜索"/>
+                    <input class="search_btn" id="searchLogo"
+                           type="submit" value="🔍"/>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="coolBackground" id="coolBackgroundDiv">
+        <canvas id="display" style="position: fixed"></canvas>
+        <div id="blachole" style="position: fixed"></div>
+
+        <!-- 照片墙主体部分 -->
+        <div class="imgContainer" id="imageShow">
+            <div class="imageBox" id="imageBox">
+            </div>
         </div>
 
-        <div class="div_frag_container">
-            <a class="frag fragUnactive" id="fragFind" href="indexFind">发现</a>
-            <a class="frag fragActive" id="" href="#">好友</a>
-            <a class="frag fragUnactive" id="fragMine" href="indexMine">我的</a>
-        </div>
-
-        <div class="div_search_container">
-            <form role="form" accept-charset="UTF-8" method="get" onsubmit="return false">
-                <input class="search_input" id="searchInput" type="text"
-                       name="keyWord" placeholder="搜索"/>
-                <input class="search_btn" id="searchLogo"
-                       type="submit" value="🔍"/>
-            </form>
+        <!-- 搜索照片结果展示部分 -->
+        <div class="imgContainer" style="display: none" id="searchImageShow">
+            <div class="KeyWordLabel">
+                <button class="backToMyImageBtn uploadBtn" id="searchBackToMyImageBtn">返回</button>
+                <input class="searchKeyWord" type="text" id="searchKeyWord" readonly/>
+                <h2>搜索结果</h2>
+            </div>
+            <div class="imageBox" id="searchImageBox">
+            </div>
         </div>
     </div>
-</nav>
 
-<div class="coolBackground" id="coolBackgroundDiv">
-    <canvas id="display" style="position: fixed"></canvas>
-    <div id="blachole" style="position: fixed"></div>
+    <script src="javascripts/md5.min.js"></script>
+    <script src="javascripts/jquery/jquery-3.2.1.js"></script>
+    <script src="javascripts/index/constellation.js"></script>
 
-    <!-- 照片墙主体部分 -->
-    <div class="imgContainer" id="imageShow">
-        <div class="imageBox" id="imageBox">
-        </div>
-    </div>
+    <!-- 初始化界面，获得用户头像和数据库图片-->
+    <script src="javascripts/index/indexFollow/initializePage.js"></script>
 
-    <!-- 搜索照片结果展示部分 -->
-    <div class="imgContainer" style="display: none" id="searchImageShow">
-        <div class="KeyWordLabel">
-            <button class="backToMyImageBtn uploadBtn" id="searchBackToMyImageBtn">返回</button>
-            <input class="searchKeyWord" type="text" id="searchKeyWord" readonly/>
-            <h2>搜索结果</h2>
-        </div>
-        <div class="imageBox" id="searchImageBox">
-        </div>
-    </div>
-</div>
+    <!-- 按钮动作监听 -->
+    <script src="javascripts/index/indexFollow/btnClickListener.js"></script>
 
-<script src="javascripts/md5.min.js"></script>
-<script src="javascripts/jquery/jquery-3.2.1.js"></script>
-<!--<script src="javascripts/jquery/jquery-ui.min.js"></script>-->
-<script src="javascripts/index/constellation.js"></script>
-<script src="javascripts/jquery/jquery.imgbox.pack.js"></script>
+    <!-- 炫酷的背景 -->
+    <script src="javascripts/index/coolBackground.js"></script>
 
-<!-- 初始化界面，获得用户头像和数据库图片-->
-<script>
-    $(function () {
-        $.get('userLogo', function (data) {
-            $("#userLogo").attr("src", data.userLogo);
-        });
-        $.get('followImages', function (data) {
-            if (data) {
-                var imgPaths = $.parseJSON( data );
-                for (var i = 0; i < imgPaths.length; i++) {
-                    var imgPath = imgPaths[i];
-                    if( imgPath.imgPath ) {
-                        var divImg = "<div class='imgList' id='findHot-"+ imgPath.imgID +"'>" +
-                            "<img src='" + imgPath.imgPath + "'/>" +
-                            "<button id='findHot-"+ imgPath.imgID +"' class='goodBtn' onclick='giveImageGood(this, \"hotLike-\")'>👍</button>" +
-                            "<button id='hotLike-"+ imgPath.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
-                            "<input class='CommonInput RightInput' value='by " + imgPath.userID + "' readonly/>" +
-                            "</div>";
-                        $("#imageBox").append(divImg);
-                    }
-                }
-            }
-        });
-        $("#coolBackgroundDiv").css("min-height", $(window).height());
-    });
-</script>
-
-<!-- 按钮动作监听 -->
-<script>
-    $("#searchLogo").click(function () {
-        $("#searchImageBox").empty();
-        var keyWord = $("#searchInput").val().toString();
-        if( keyWord!==undefined && keyWord.length>0 ){
-            var data = {"keyWord": keyWord};
-            $.post('searchImage', data, function (data) {
-                if (data) {
-                    var imgPaths = $.parseJSON( data );
-                    $("#searchImageShow").show();
-                    $("#imageShow").hide();
-                    for (var i = 1; i < imgPaths.length; i++) {
-                        var imgPath = imgPaths[i];
-                        if ( imgPath.imgPath ) {
-                            var divImg = "<div class='imgList' id='findSearch-"+ imgPath.imgID + "'>" +
-                                "<img src='" + imgPath.imgPath + "'/>" +
-                                "<button id='findSearchBtn-"+ imgPath.imgID + "' class='goodBtn' onclick='giveImageGood(this, \"searchlike-\")'>👍</button>" +
-                                "<button id='searchLike-"+ imgPath.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
-                                "<input class='CommonInput RightInput' value='by " + imgPath.userID + "' readonly/>" +
-                                "</div>";
-                            $("#searchImageBox").append(divImg);
-                        }
-                    }
-                }
-            });
-        }
-        $("#searchInput").val("");
-        $("#searchKeyWord").val(keyWord);
-    });
-
-    $("#searchBackToMyImageBtn").click(function () {
-        $("#searchImageBox").empty();
-        $("#imageShow").show();
-        $("#searchImageShow").hide();
-    });
-
-    function giveImageGood(obj, prefix) {
-        var temp1 = $(obj).attr('id');
-        var temp2 = temp1.split('-');
-        var IDValue = temp2[1];
-        var data = {"imgID": IDValue};
-        $.post('goodImage', data, function (res) {
-            var result = $.parseJSON( res );
-            if( result.status ){
-                $(obj).hide();
-                $("#"+prefix+IDValue).show();
-            }
-            else {
-                alert('抱歉，点赞失败。。。');
-            }
-        })
-    }
-</script>
-
-<!-- 炫酷的背景 -->
-<script src="javascripts/index/coolBackground.js"></script>
-
-<!-- 用户信息下拉菜单 -->
-<script src="javascripts/index/logoShowInfo.js"></script>
+    <!-- 用户信息下拉菜单 -->
+    <script src="javascripts/index/logoShowInfo.js"></script>
 
 </body>
 

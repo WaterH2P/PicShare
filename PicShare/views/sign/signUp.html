@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>PicShare Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/sign.css">
+</head>
+
+<body>
+	<div class="sign">
+		<div class="logo">
+			<!-- 返回主页 -->
+			<a target="_self" href="">
+				<img src="images/PicShare.png">
+			</a>
+		</div>
+
+		<div class="main">
+			<h4 class="title">
+				<div id="aSign">
+					<a href="signIn">登录</a>
+					<b>·</b>
+					<a class="active" href="signUp">注册</a>
+				</div>
+                <div id="aShowID" style="display: none">
+                    <a class="active">你的帐号</a>
+                </div>
+			</h4>
+
+			<div>
+				<form role="form" id="signUpForm" accept-charset="utf-8" method="post" onsubmit="return false">
+					<!-- 昵称 -->
+                    <input class="input_prepend input_up_prepend" placeholder="请输入昵称"
+                           type="text" name="userName" id="userName" required/>
+
+					<!-- 手机号 -->
+                    <input class="input_prepend input_middle_prepend" placeholder="请输入邮箱"
+                           type="email" name="userEmail" id="userEmail" required/>
+
+					<!-- 登录密码输入框 -->
+                    <input class="input_prepend input_middle_prepend" placeholder="请输入密码"
+                           type="password" name="userPassword" id="userPassword" required/>
+                    <input class="input_prepend input_down_prepend" placeholder="请再次输入密码"
+                           type="password" name="userPasswordAgain" id="userPasswordAgain" required/>
+
+					<!-- 注册 -->
+					<input class="sign_button" type="submit" id="signUpSubmit" name="signUpSubmit" value="注册"/>
+				</form>
+                <div id="showIDDiv" style="display: none">
+                    <input class="input_prepend" style="margin-bottom: 50px;padding: 0;text-align: center;"
+                           type="text" id="userIDShow" readonly />
+                    <a href="signIn">
+                        <input type="submit" id="goToSignIn" value="已铭记账号" class="sign_button"/>
+                    </a>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    <script src="javascripts/other/md5.min.js"></script>
+    <script src="javascripts/jquery/jquery-3.2.1.js"></script>
+
+    <!-- 按钮动作监听 -->
+    <script src="javascripts/sign/signUp/btnClickListener.js"></script>
+</body>
+
+</html>

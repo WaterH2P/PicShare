@@ -11,7 +11,10 @@ var sqlite = require('../database/sqlite3');
 
 router.route('/profile')
     .get(function (req, res, next) {
-        res.render('info/profile');
+        var userID = userOnline[req.session.user];
+        sqlite.selectUserLogo(userID, function(data) {
+            res.render('info/profile',data);
+        });
     });
 
 router.route('/uploadLogo')
@@ -124,7 +127,10 @@ router.route('/changeInfo')
 
 router.route('/followList')
     .get(function (req, res, next) {
-        res.render('info/followList');
+        var userID = userOnline[req.session.user];
+        sqlite.selectUserLogo(userID, function(data) {
+            res.render('info/followList',data);
+        });
     });
 
 router.route('/followInfo')
