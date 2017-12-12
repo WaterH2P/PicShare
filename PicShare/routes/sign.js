@@ -8,6 +8,7 @@ var router = express.Router();
 
 var crypto = require('crypto');
 var sqlite = require('../database/sqlite3');
+var cf = require('./commonFunc');
 
 var IDtxtPath = path.join(__dirname, './ID.txt');
 
@@ -56,27 +57,39 @@ module.exports = router;
 var signUp = function(userPassword, userName, userEmail) {
     var userID = undefined;
     try {
-        var IDs = fs.readFileSync(path.join(__dirname, './ID.txt'), 'utf8');
+
+        var IDs = fs.readFileSync(IDtxtPath, 'utf8');
         IDs = IDs.split(';');
         userID = IDs.length * IDDistance + 3432;
         if( userPassword!==undefined || userPassword.length!==0 ) {
-            fs.appendFile(path.join(__dirname, './ID.txt'), userID + "," + userPassword + ";\n", function (err) {
+            fs.appendFile(IDtxtPath, userID + "," + userPassword + ";\n", function (err) {
                 if (err) {
                     util.log("write id wrong");
                 }
             });
-            fs.exists(path.join(__dirname, '../public/images/'+userID), function (res) {
+
+            var dirPath = path.join(__dirname, '../public/images/'+userID)
+            fs.exists(dirPath, function (res) {
                 if( res ){
                     util.log( userID + " image dir has existed!");
                 }
                 else {
-                    fs.mkdir(path.join(__dirname, '../public/images/'+userID), function (err) {
+                    fs.mkdir(dirPath, function (err) {
                         if( err ){
                             util.log( userID + " fail to create image dir !");
                         }
                     });
                 }
             });
+
+            var userLogPath = path.join(__dirname, '../database/userLog/'+userID);
+            var signUpMessage = userID + " sign up successfully at " + cf.getNowTime();
+            fs.writeFile( userLogPath, signUpMessage, 'utf8', function (err) {
+                if( err ){
+                    util.log( "fail to write sign up message!");
+                }
+            });
+
             sqlite.addUser(userID, userPassword, userName, userEmail);
         }
     }catch(err){
@@ -87,7 +100,7 @@ var signUp = function(userPassword, userName, userEmail) {
 
 var signIn = function(userID, userPassword) {
     try{
-        var IDs = fs.readFileSync(path.join(__dirname, './ID.txt'), 'utf8');
+        var IDs = fs.readFileSync(IDtxtPath, 'utf8');
         IDs = IDs.split(';\n');
         for( var i=0; i<IDs.length; i++ ){
             var IDAndPassword = IDs[i].split(",");
@@ -103,12 +116,13 @@ var signIn = function(userID, userPassword) {
         }
         return false;
     }catch(err){
-        util.log("sign in read file wrong");
-        fs.appendFile(path.join(__dirname, './log.txt'), userID + " fail to sign in at " + new Date().getTime() + "\n", 'utf8', function (err) {
-            if (err) {
-                util.log("fail to write 'fail to sign in log' ");
-            }
-        });
+        var message = userID + " fail to sign in at " + cf.getNowTime();
+        // fs.appendFile(path.join(__dirname, './log.txt'), userID + " fail to sign in at " + new Date().getTime() + "\n", 'utf8', function (err) {
+        //     if (err) {
+        //         util.log("fail to write 'fail to sign in log' ");
+        //     }
+        // });
+        cf.writeLog( userID, message );
         return false;
     }
 };
