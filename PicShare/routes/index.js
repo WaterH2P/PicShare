@@ -108,7 +108,8 @@ router.route('/delMyImage')
 router.route('/uploadImage')
     .post(function (req, res, next) {
         var userID = userOnline[req.session.user];
-        var imgDescription = "hahaha";
+        var imgDescription = "default";
+        var imgSign = "default";
         var form = new formidable.IncomingForm();
         var uploadDir = path.join(__dirname, '../public/images/' + userID);
         form.keepExtensions = true;             //保留后缀
@@ -155,8 +156,7 @@ router.route('/uploadImage')
                                 else {
                                     util.log(userID + ' upload image ' + files[item].name + ' successfully');
 
-                                    // var result = {"status": status, "message": message, "imgPath":imgPath};
-                                    sqlite.insertImage(userID, imgDescription, files[item].name, function (result) {
+                                    sqlite.insertImage(userID, imgDescription, files[item].name, imgSign, function (result) {
                                         if( result.status ){
                                             message = "Congratulations! Success!";
                                             status = true;

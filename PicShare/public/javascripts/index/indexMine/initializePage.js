@@ -14,7 +14,19 @@ $(function () {
                         var pre = {"divIDPrex":"findMyDiv-", "showSignPrex":"signShow-",
                             "delBtnIDPrex":"findMyBtn-", "changeBtnIDPrex":"findChangeBtn-",
                             "submitChangeBtnIDPrex":"findSubmitChangeBtn-"};
-                        showImage( imgInfo, "imageBox", pre);
+                        var divID = "imageBox";
+                        var divImg = "<div class='imgList' id='" + pre.divIDPrex + imgInfo.imgID +"'>" +
+                            "<img src='" + imgInfo.imgPath + "'/>" +
+                            "<input class='CommonInput LeftInput' value='❤️ " + imgInfo.likeNum + "' readonly/>" +
+                            "<input class='CommonInput SignInput' id='" + pre.showSignPrex + imgInfo.imgID + "' value='" + imgInfo.imgSign + "' readonly/>" +
+                            "<button class='justForFindBtnDel delBtn' id='" + pre.delBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                                "onclick='deleteImage(this)'>删除</button>" +
+                            "<button class='justForFindBtnChangeSign delBtn' id='" + pre.changeBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                                "onclick='mainChangeSign(this)'>修改</button>" +
+                            "<button class='delBtn' id='" + pre.submitChangeBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                                "onclick='mainSubmitChange(this)'>提交</button>" +
+                            "</div>";
+                        $("#"+divID).append(divImg);
                     }
                 }
             }
@@ -26,16 +38,3 @@ $(function () {
     });
     $("#coolBackgroundDiv").css("min-height", $(window).height());
 });
-
-
-function showImage(imgInfo, divID, pre) {
-    var divImg = "<div class='imgList' id='" + pre.divIDPrex + imgInfo.imgID +"'>" +
-        "<img src='" + imgInfo.imgPath + "'/>" +
-        "<input class='CommonInput LeftInput' value='❤️ " + imgInfo.likeNum + "' readonly/>" +
-        "<input class='CommonInput SignInput' id='" + pre.showSignPrex + imgInfo.imgID + "' value='" + imgInfo.imgSign + "' readonly/>" +
-        "<button class='justForFindBtnDel delBtn' id='" + pre.delBtnIDPrex + imgInfo.imgID +"' style='display:none' onclick='deleteImage(this)'>删除</button>" +
-        "<button class='justForFindBtnChangeSign delBtn' id='" + pre.changeBtnIDPrex + imgInfo.imgID +"' style='display:none' onclick='changeSign(this)'>修改</button>" +
-        "<button class='delBtn' id='" + pre.submitChangeBtnIDPrex + imgInfo.imgID +"' style='display:none' onclick='submitChange(this)'>提交</button>" +
-        "</div>";
-    $("#"+divID).append(divImg);
-}

@@ -1,6 +1,5 @@
 
 $("#searchLogo").click(function () {
-    $("#ShowAllChangeSignBtn").hide();
     $("#searchImageBox").empty();
     // 按钮恢复初始状态
     $("#delImageBackBtn").click();
@@ -21,7 +20,19 @@ $("#searchLogo").click(function () {
                         var pre = {"divIDPrex":"searchMyDiv-", "showSignPrex":"searchSignShow-",
                             "delBtnIDPrex":"searchMyBtn-", "changeBtnIDPrex":"searchChangeBtn-",
                             "submitChangeBtnIDPrex":"searchSubmitChangeBtn-"};
-                        showImage( imgInfo, "searchImageBox", pre);
+                        var divID = "searchImageBox";
+                        var divImg = "<div class='imgList' id='" + pre.divIDPrex + imgInfo.imgID +"'>" +
+                            "<img src='" + imgInfo.imgPath + "'/>" +
+                            "<input class='CommonInput LeftInput' value='❤️ " + imgInfo.likeNum + "' readonly/>" +
+                            "<input class='CommonInput SignInput' id='" + pre.showSignPrex + imgInfo.imgID + "' value='" + imgInfo.imgSign + "' readonly/>" +
+                            "<button class='justForFindBtnDel delBtn' id='" + pre.delBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                                "onclick='deleteImage(this)'>删除</button>" +
+                            "<button class='justForFindBtnChangeSign delBtn' id='" + pre.changeBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                                "onclick='searchChangeSign(this)'>修改</button>" +
+                            "<button class='delBtn' id='" + pre.submitChangeBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                                "onclick='searchSubmitChange(this)'>提交</button>" +
+                            "</div>";
+                        $("#"+divID).append(divImg);
                     }
                 }
             }
@@ -36,7 +47,7 @@ $("#uploadPictureBtn").click(function () {
     // 按钮恢复初始状态
     $("#delImageBackBtn").click();
     $("#changeSignBackBtn").click();
-
+    // 上传文件没有删除和修改标签的功能
     $("#showAllDelImageBtn").hide();
     $("#ShowAllChangeSignBtn").hide();
 
@@ -130,45 +141,60 @@ function deleteImage(obj) {
     })
 }
 
-function changeSign(obj) {
+
+function changeSign(obj, signPrefix, btnPrefix) {
     $(".justForFindBtnChangeSign").hide();
     var temp1 = $(obj).attr('id');
     var temp2 = temp1.split('-');
     var IDValue = temp2[1];
-    $("#findSubmitChangeBtn-"+IDValue).show();
-    $("#signShow-"+IDValue).removeAttr("readonly");
-    $("#signShow-"+IDValue).css("background", "transparent");
-    $("#signShow-"+IDValue).css("border", "1px solid #00b7ee");
+
+    $("#"+btnPrefix+IDValue).show();
+    $("#"+signPrefix+IDValue).removeAttr("readonly");
+    $("#"+signPrefix+IDValue).css("background", "transparent");
+    $("#"+signPrefix+IDValue).css("border", "1px solid #00b7ee");
+}
+function mainChangeSign(obj) {
+    changeSign(obj, "signShow-", "findSubmitChangeBtn-");
+}
+function searchChangeSign(obj) {
+    changeSign(obj, "searchSignShow-", "searchSubmitChangeBtn-");
 }
 
-function submitChange(obj) {
+
+function submitChange(obj, signPrefix, btnPrefix) {
     var temp1 = $(obj).attr('id');
     var temp2 = temp1.split('-');
     var IDValue = temp2[1];
-    var newSign = $("#signShow-"+IDValue).val();
-    var data = {"imgID":IDValue, "imgSign":newSign};
-    $.post('changeImageSign', data, function (res) {
-        var result = $.parseJSON( res );
-        if( result.status ){
-            $("#signShow-"+IDValue).attr("readonly", "readonly");
-            $("#signShow-"+IDValue).css("background", "#00b7ee");
-            $("#signShow-"+IDValue).css("border", "transparent");
-            $("#findSubmitChangeBtn-"+IDValue).hide();
+    var newSign = $("#"+signPrefix+IDValue).val();
+    if( newSign.length===0 ){
+        alert( "请输入标签" );
+    }
+    else{
+        var data = {"imgID":IDValue, "imgSign":newSign};
+        $.post('changeImageSign', data, function (res) {
+            $("#"+signPrefix+IDValue).attr("readonly", "readonly");
+            $("#"+signPrefix+IDValue).css("background", "#00b7ee");
+            $("#"+signPrefix+IDValue).css("border", "transparent");
+            $("#"+btnPrefix+IDValue).hide();
+
             $(".justForFindBtnChangeSign").show();
-        }
-        else{
-            alert("修改失败，情况不详！");
-            $("#signShow-"+IDValue).attr("disabled", "readonly");
-            $("#signShow-"+IDValue).css("background", "#00b7ee");
-            $("#signShow-"+IDValue).css("border", "transparent");
-            $("#findSubmitChangeBtn-"+IDValue).hide();
-            $(".justForFindBtnChangeSign").show();
-        }
-    })
+
+            var result = $.parseJSON( res );
+            if( !result.status ){
+                alert("修改失败，情况不详！");
+            }
+        });
+    }
+}
+function mainSubmitChange(obj) {
+    submitChange(obj, "signShow-", "findSubmitChangeBtn-");
+}
+function searchSubmitChange(obj) {
+    submitChange(obj, "searchSignShow-", "searchSubmitChangeBtn-");
 }
 
 
-
+// 显示所有删除按钮
 $("#showAllDelImageBtn").click(function () {
     $("#showAllDelImageBtn").hide();
     $(".justForFindBtnDel").show();
@@ -183,6 +209,7 @@ $("#delImageBackBtn").click(function () {
     $("#ShowAllChangeSignBtn").show();
 });
 
+// 显示所有修改按钮
 $("#ShowAllChangeSignBtn").click(function () {
     $("#showAllDelImageBtn").hide();
     $("#ShowAllChangeSignBtn").hide();

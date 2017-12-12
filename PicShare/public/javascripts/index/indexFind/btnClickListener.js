@@ -53,8 +53,13 @@ function giveImageGood(obj, prefix) {
     $.post('goodImage', data, function (res) {
         var result = $.parseJSON( res );
         if( result.status ){
+            var numTemp1 = $(obj).text();
+            var numTemp2 = numTemp1.split(" ");
+            var likeNum = numTemp2[1];
+            var newLikeNum = Number( likeNum ) + 1;
             $(obj).hide();
             $("#"+prefix+IDValue).show();
+            $("#"+prefix+IDValue).text("❤️ " + newLikeNum);
         }
         else {
             alert('抱歉，点赞失败。。。');
@@ -80,8 +85,7 @@ function downloadImage(obj) {
     var temp2 = temp1.split('-');
     var IDValue = temp2[1];
     var NameValue = temp2[2];
-    var imgPath = undefined;
-    imgPath = $("#searchImagePath-"+IDValue).attr('src');
+    var imgPath = $("#searchImagePath-"+IDValue).attr('src');
     if( !imgPath ){
         imgPath = $("#findImagePath-"+IDValue).attr('src');
     }

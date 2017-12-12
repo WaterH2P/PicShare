@@ -14,7 +14,8 @@ $("#searchLogo").click(function () {
                     if ( imgInfo.imgPath ) {
                         var divImg = "<div class='imgList' id='findSearch-"+ imgInfo.imgID + "'>" +
                             "<img src='" + imgInfo.imgPath + "'/>" +
-                            "<button id='findSearchBtn-"+ imgInfo.imgID + "' class='goodBtn' onclick='giveImageGood(this, \"searchlike-\")'>👍</button>" +
+                            "<button id='findSearchBtn-"+ imgInfo.imgID + "' class='goodBtn' " +
+                                "onclick='giveImageGood(this, \"searchLike-\")'>👍 " + imgInfo.likeNum + "</button>" +
                             "<button id='searchLike-"+ imgInfo.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
                             "<input class='CommonInput SignInput' value='" + imgInfo.imgSign + "' readonly/>" +
                             "<input class='CommonInput RightInput' value='by " + imgInfo.userID + "' readonly/>" +
@@ -45,8 +46,13 @@ function giveImageGood(obj, prefix) {
     $.post('goodImage', data, function (res) {
         var result = $.parseJSON( res );
         if( result.status ){
+            var numTemp1 = $(obj).text();
+            var numTemp2 = numTemp1.split(" ");
+            var likeNum = numTemp2[1];
+            var newLikeNum = Number( likeNum ) + 1;
             $(obj).hide();
             $("#"+prefix+IDValue).show();
+            $("#"+prefix+IDValue).text("❤️ " + newLikeNum);
         }
         else {
             alert('抱歉，点赞失败。。。');

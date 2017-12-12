@@ -8,7 +8,8 @@ $(function () {
                 if( imgInfo.imgPath ) {
                     var divImg = "<div class='imgList' id='findHot-"+ imgInfo.imgID +"'>" +
                         "<img src='" + imgInfo.imgPath + "'/>" +
-                        "<button id='findHot-"+ imgInfo.imgID +"' class='goodBtn' onclick='giveImageGood(this, \"hotLike-\")'>👍</button>" +
+                        "<button id='findHot-"+ imgInfo.imgID +"' class='goodBtn' " +
+                            "onclick='giveImageGood(this, \"hotLike-\")'>👍 " + imgInfo.likeNum + "</button>" +
                         "<button id='hotLike-"+ imgInfo.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
                         "<input class='CommonInput SignInput' value='" + imgInfo.imgSign + "' readonly/>" +
                         "<input class='CommonInput RightInput' value='by " + imgInfo.userID + "' readonly/>" +
