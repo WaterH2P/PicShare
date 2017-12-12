@@ -484,6 +484,37 @@ nav form .search_btn {
 }
 
 
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 侧边按钮 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
+
+.div_btn_fix{
+    position: fixed;
+    display: block;
+    top: 30%;
+    right: 25px;
+    text-align: center;
+    width: 180px;
+    height: 300px;
+    background: transparent;
+}
+
+.div_btn_fix button{
+    font-family: Georgia,Times New Roman,Times,Songti SC,serif;
+    width: 120px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 25px;
+    background: transparent;
+    cursor: pointer;
+    margin-top: 15px;
+    border: 1px solid #ffbf41;
+    color: #ffbf41;
+}
+
+.div_btn_fix button:hover{
+    background: #c1f7ff;
+}
+
+
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 上传图片 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 
 .uploadProgressBar{

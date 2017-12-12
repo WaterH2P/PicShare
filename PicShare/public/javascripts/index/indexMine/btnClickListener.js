@@ -2,6 +2,10 @@
 $("#searchLogo").click(function () {
     $("#ShowAllChangeSignBtn").hide();
     $("#searchImageBox").empty();
+    // 按钮恢复初始状态
+    $("#delImageBackBtn").click();
+    $("#changeSignBackBtn").click();
+
     var keyWord = $("#searchInput").val().toString();
     if( keyWord!==undefined && keyWord.length>0 ){
         var data = {"keyWord": keyWord};
@@ -29,6 +33,13 @@ $("#searchLogo").click(function () {
 
 
 $("#uploadPictureBtn").click(function () {
+    // 按钮恢复初始状态
+    $("#delImageBackBtn").click();
+    $("#changeSignBackBtn").click();
+
+    $("#showAllDelImageBtn").hide();
+    $("#ShowAllChangeSignBtn").hide();
+
     $("#imageShow").hide();
     $("#searchImageShow").hide();
     $("#uploadImageShow").show();
@@ -67,10 +78,17 @@ $("#imageUploadSubmit").click(function () {
 $("#uploadBackToMyImageBtn").click(function () {
     $("#imageShow").show();
     $("#uploadImageShow").hide();
+
+    $("#showAllDelImageBtn").show();
+    $("#ShowAllChangeSignBtn").show();
 });
 
 
 $("#searchBackToMyImageBtn").click(function () {
+    // 按钮恢复初始状态
+    $("#delImageBackBtn").click();
+    $("#changeSignBackBtn").click();
+
     $("#searchImageBox").empty();
     $("#imageShow").show();
     $("#searchImageShow").hide();

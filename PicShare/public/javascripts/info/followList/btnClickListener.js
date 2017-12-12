@@ -32,7 +32,8 @@ $("#searchLogo").click(function () {
                 var leadInfo = "<div class='info_frag'>" +
                     "<input class='inputCommon IDInput' value='账号' readonly>" +
                     "<input class='inputCommon nameInput' value='昵称' readonly>" +
-                    "<input class='inputCommon nameInput' value='邮箱' readonly>" +
+                    "<input class='inputCommon emailInput' value='邮箱' readonly>" +
+                    "<input class='inputCommon groupInput' value='分组' readonly>" +
                     "<button class='inputCommon unFollowBtn' style='visibility: hidden;' disabled></button>" +
                     "</div>";
                 $("#searchFollowMain").append(leadInfo);
@@ -43,7 +44,13 @@ $("#searchLogo").click(function () {
                     var infoDiv = "<div class='info_frag' id='search_"+info.userID+"_info_div'>" +
                         "<input class='inputCommon IDInput' value='" + info.userID + "' readonly />" +
                         "<input class='inputCommon nameInput' value='" + info.userName + "' readonly />" +
-                        "<input class='inputCommon nameInput' value='" + info.userEmail + "' readonly />" +
+                        "<input class='inputCommon emailInput' value='" + info.userEmail + "' readonly />" +
+                        "<div class='inputCommon groupInput'><select id='mySelect'>" +
+                            "<option value='default' selected='selected'>default</option>" +
+                            "<option value='nb'>nb</option>" +
+                            "<option value='student'>student</option>" +
+                            "<option value='friend'>friend</option>" +
+                        "</select></div>" +
                         "<button class='inputCommon unFollowBtn' id='" + info.userID + "_" + index + "' onclick='followUser(this)'>关注</button>" +
                         "</div>";
                     infoSave[index] = {"userID":info.userID, "userName":info.userName, "userEmail":info.userEmail};
@@ -66,9 +73,10 @@ function followUser(obj) {
     var temp1 = $(obj).attr('id');
     var temp2 = temp1.split("_");
     var indexTemp = temp2[1];
+    infoSave[indexTemp].followedGroup = $("#mySelect").val();
     var info = infoSave[indexTemp];
     var followedID = info.userID;
-    var data = {"followedID":followedID};
+    var data = {"followedID":followedID, "followedGroup":info.followedGroup};
     $.post('followUser', data, function (res) {
         var result = $.parseJSON( res );
         if( result.status ){
@@ -76,7 +84,8 @@ function followUser(obj) {
             var infoDiv = "<div class='info_frag' id='"+info.userID+"_info_div'>" +
                 "<input class='inputCommon IDInput' value='" + info.userID + "' readonly />" +
                 "<input class='inputCommon nameInput' value='" + info.userName + "' readonly />" +
-                "<input class='inputCommon nameInput' value='" + info.userEmail + "' readonly />" +
+                "<input class='inputCommon emailInput' value='" + info.userEmail + "' readonly />" +
+                "<input class='inputCommon groupInput' value='" + info.followedGroup + "' readonly />" +
                 "<button class='inputCommon unFollowBtn' id='" + info.userID + "' onclick='cancelFollow(this)'>取消关注</button>" +
                 "</div>";
             $("#followMain").append(infoDiv);

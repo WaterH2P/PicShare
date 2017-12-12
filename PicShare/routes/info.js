@@ -159,7 +159,8 @@ router.route('/followUser')
     .post(function (req, res, next) {
         var userID = userOnline[req.session.user];
         var followedID = req.body.followedID;
-        sqlite.addFollow(userID, followedID, function (data) {
+        var followedGroup = req.body.followedGroup;
+        sqlite.addFollow(userID, followedID, followedGroup, function (data) {
             var result = {"status":data};
             res.send( JSON.stringify(result) );
         })

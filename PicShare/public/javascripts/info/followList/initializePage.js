@@ -9,7 +9,8 @@ $(function () {
                     var infoDiv = "<div class='info_frag' id='"+info.userID+"_info_div'>" +
                         "<input class='inputCommon IDInput' value='" + info.userID + "' readonly />" +
                         "<input class='inputCommon nameInput' value='" + info.userName + "' readonly />" +
-                        "<input class='inputCommon nameInput' value='" + info.userEmail + "' readonly />" +
+                        "<input class='inputCommon emailInput' value='" + info.userEmail + "' readonly />" +
+                        "<input class='inputCommon groupInput' value='" + info.followedGroup + "' readonly>" +
                         "<button class='inputCommon unFollowBtn' id='" + info.userID + "' onclick='cancelFollow(this)'>取消关注</button>" +
                         "</div>";
                     $("#followMain").append(infoDiv);

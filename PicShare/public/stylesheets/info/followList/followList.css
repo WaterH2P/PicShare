@@ -44,9 +44,10 @@ div {
 .profile_page .main .info_frag .inputCommon{
     font-family: Georgia,Times New Roman,Times,Songti SC,serif;
     position: relative;
-    margin: 10px 20px;
+    display: inline-block;
+    margin: 10px 10px;
     text-align: center;
-    font-size: 18px;
+    font-size: 17px;
     height: 30px;
     background: transparent;
     border: 1px solid transparent;
@@ -58,11 +59,15 @@ div {
 }
 
 .profile_page .main .info_frag .nameInput{
-    width: 170px;
+    width: 160px;
 }
 
 .profile_page .main .info_frag .emailInput{
-    width: 240px;
+    width: 220px;
+}
+
+.profile_page .main .info_frag .groupInput{
+    width: 110px;
 }
 
 .profile_page .main .info_frag .unFollowBtn{

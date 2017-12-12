@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title>PicShare</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/index/index.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/index/indexFind.css">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
 
             <div class="div_frag_container">
                 <a class="frag fragActive" id="fragFind" href="#">发现</a>
-                <a class="frag fragUnactive" id="" href="indexFollow">好友</a>
+                <a class="frag fragUnactive" id="" href="indexFollow">关注</a>
                 <a class="frag fragUnactive" id="fragMine" href="indexMine">我的</a>
             </div>
 
@@ -78,6 +79,14 @@
             </div>
             <div class="imageBox" id="searchImageBox">
             </div>
+        </div>
+
+        <!-- 右边下载按钮 -->
+        <div class="div_btn_fix">
+            <button id="showAllDownloadImageBtn">下载照片</button>
+            <button style="visibility: hidden"></button>
+            <button style="visibility: hidden"></button>
+            <button id="downloadImageBackBtn" style="display: none">下载完毕</button>
         </div>
     </div>
 

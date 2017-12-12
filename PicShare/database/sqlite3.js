@@ -94,7 +94,7 @@ exports.updateUserInfo = function (userID, userName, userEmail, callback) {
 
 exports.selectFollowInfo = function (followerID, callback) {
     util.log("database search followInfo: " + followerID);
-    db.all("SELECT userID, userName, userEmail FROM " + followTable + "," + userTable +
+    db.all("SELECT userID, userName, userEmail, followedGroup FROM " + followTable + "," + userTable +
         " WHERE followerID = ? and userID=followedID", followerID, function(err, rows) {
         if( err ){
             util.log("search followInfo wrong : select wrong");
@@ -107,7 +107,8 @@ exports.selectFollowInfo = function (followerID, callback) {
                 var index = 0;
                 var followInfo = {};
                 rows.forEach(function (row) {
-                    followInfo = {"userID":row.userID, "userName":row.userName, "userEmail":row.userEmail};
+                    followInfo = {"userID":row.userID, "userName":row.userName,
+                        "userEmail":row.userEmail, "followedGroup":row.followedGroup};
                     followListInfo[index] = followInfo;
                     index++;
                 });
@@ -121,9 +122,9 @@ exports.selectFollowInfo = function (followerID, callback) {
     });
 };
 
-exports.addFollow = function (userID, followedID, callback) {
+exports.addFollow = function (userID, followedID, followedGroup, callback) {
     var followID = userID + "_" + followedID;
-    db.run("INSERT INTO " + followTable + " VALUES(?,?,?)", followID, userID, followedID, function (err) {
+    db.run("INSERT INTO " + followTable + " VALUES(?,?,?,?)", followID, userID, followedID, followedGroup, function (err) {
         if( err ){
             util.log( userID + " fail to follow " + followedID );
             var result = {"status":false};
@@ -182,7 +183,7 @@ exports.selectUserFuzzily = function (userID, keyWord, callback) {
 };
 
 exports.selectHotImages = function (userID, callback) {
-    db.all("SELECT imgID, userID, imgPath, imgSign FROM " + imgTable + " ORDER BY likeNum", function(err, rows) {
+    db.all("SELECT imgID, userID, imgPath, imgName, imgSign FROM " + imgTable + " ORDER BY likeNum", function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
             callback(false);
@@ -193,7 +194,8 @@ exports.selectHotImages = function (userID, callback) {
                 var index = 0;
                 var imgInfo = {};
                 rows.forEach(function (row) {
-                    imgInfo = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath, "imgSign":row.imgSign};
+                    imgInfo = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath,
+                        "imgName":row.imgName, "imgSign":row.imgSign};
                     imgInfos[index] = imgInfo;
                     index++;
                 });
@@ -208,7 +210,7 @@ exports.selectHotImages = function (userID, callback) {
 };
 
 exports.selectFollowImages = function (userID, callback) {
-    db.all("SELECT imgID, userID, imgPath, imgSign FROM " + imgTable + "," + followTable +
+    db.all("SELECT imgID, userID, imgPath, imgName, imgSign FROM " + imgTable + "," + followTable +
         " WHERE followerID=? and userID=followedID", userID, function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
@@ -220,7 +222,8 @@ exports.selectFollowImages = function (userID, callback) {
                 var index = 0;
                 var imgInfo = {};
                 rows.forEach(function (row) {
-                    imgInfo = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath, "imgSign":row.imgSign};
+                    imgInfo = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath,
+                        "imgName":row.imgName, "imgSign":row.imgSign};
                     imgInfos[index] = imgInfo;
                     index++;
                 });
@@ -360,7 +363,7 @@ exports.deleteMyImage = function (userID, imgID, callback) {
 };
 
 exports.selectImagesFuzzily = function (keyWord, callback) {
-    db.all("SELECT imgID, userID, imgPath, imgSign FROM " + imgTable + " WHERE imgName LIKE '%" + keyWord + "%'",  function(err, rows) {
+    db.all("SELECT imgID, userID, imgPath, imgName, imgSign FROM " + imgTable + " WHERE imgName LIKE '%" + keyWord + "%'",  function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
             callback(false);
@@ -371,7 +374,8 @@ exports.selectImagesFuzzily = function (keyWord, callback) {
                 var index = 0;
                 var imgPath = {};
                 rows.forEach(function (row) {
-                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath, "imgSign":row.imgSign};
+                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath,
+                        "imgName":row.imgName, "imgSign":row.imgSign};
                     imgPaths[index] = imgPath;
                     index++;
                 });
@@ -386,7 +390,7 @@ exports.selectImagesFuzzily = function (keyWord, callback) {
 };
 
 exports.selectFollowImagesFuzzily = function (userID, keyWord, callback) {
-    db.all("SELECT imgID, userID, imgPath, imgSign FROM " + imgTable + "," + followTable +
+    db.all("SELECT imgID, userID, imgPath, imgName, imgSign FROM " + imgTable + "," + followTable +
         " WHERE followerID=? and followedID=userID and imgName LIKE '%" + keyWord + "%'", userID, function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
@@ -398,7 +402,8 @@ exports.selectFollowImagesFuzzily = function (userID, keyWord, callback) {
                 var index = 0;
                 var imgPath = {};
                 rows.forEach(function (row) {
-                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath, "imgSign":row.imgSign};
+                    imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath,
+                        "imgName":row.imgName, "imgSign":row.imgSign};
                     imgPaths[index] = imgPath;
                     index++;
                 });
