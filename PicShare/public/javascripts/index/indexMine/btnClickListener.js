@@ -73,13 +73,28 @@ $("#imageUploadSubmit").click(function () {
             // 是否序列化data属性，默认true(注意：false时type必须是post，详见：https://zhidao.baidu.com/question/1926250710050869147.html?qbl=relate_question_0&word=processData)
             processData: false,
             success: function(res) {
-                var result = $.parseJSON( res );
-                if( result.status ){
-                    showImage( result, 'imageBox', 'findMyBtn-', 'findMyDiv-');
+                var imgInfo = $.parseJSON( res );
+                if( imgInfo.status ){
+                    var pre = {"divIDPrex":"findMyDiv-", "showSignPrex":"signShow-",
+                        "delBtnIDPrex":"findMyBtn-", "changeBtnIDPrex":"findChangeBtn-",
+                        "submitChangeBtnIDPrex":"findSubmitChangeBtn-"};
+                    var divID = "imageBox";
+                    var divImg = "<div class='imgList' id='" + pre.divIDPrex + imgInfo.imgID +"'>" +
+                        "<img src='" + imgInfo.imgPath + "'/>" +
+                        "<input class='CommonInput LeftInput' value='❤️ " + imgInfo.likeNum + "' readonly/>" +
+                        "<input class='CommonInput SignInput' id='" + pre.showSignPrex + imgInfo.imgID + "' value='" + imgInfo.imgSign + "' readonly/>" +
+                        "<button class='justForFindBtnDel delBtn' id='" + pre.delBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                            "onclick='deleteImage(this)'>删除</button>" +
+                        "<button class='justForFindBtnChangeSign delBtn' id='" + pre.changeBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                            "onclick='mainChangeSign(this)'>修改</button>" +
+                        "<button class='delBtn' id='" + pre.submitChangeBtnIDPrex + imgInfo.imgID +"' style='display:none' " +
+                            "onclick='mainSubmitChange(this)'>提交</button>" +
+                        "</div>";
+                    $("#"+divID).append(divImg);
                 }
                 $('#uploadResultShow').show();
                 $('#uploadResultShow').css("color", "#ea6f5a");
-                $('#uploadResultShow').text( result.message );
+                $('#uploadResultShow').text( imgInfo.message );
             }
         })
     }
@@ -144,6 +159,7 @@ function deleteImage(obj) {
 
 function changeSign(obj, signPrefix, btnPrefix) {
     $(".justForFindBtnChangeSign").hide();
+    $("#changeSignBackBtn").hide();
     var temp1 = $(obj).attr('id');
     var temp2 = temp1.split('-');
     var IDValue = temp2[1];
@@ -178,6 +194,7 @@ function submitChange(obj, signPrefix, btnPrefix) {
             $("#"+btnPrefix+IDValue).hide();
 
             $(".justForFindBtnChangeSign").show();
+            $("#changeSignBackBtn").show();
 
             var result = $.parseJSON( res );
             if( !result.status ){

@@ -364,7 +364,7 @@ exports.deleteMyImage = function (userID, imgID, callback) {
 };
 
 exports.selectImagesFuzzily = function (keyWord, callback) {
-    db.all("SELECT imgID, userID, imgPath, imgName, imgSign FROM " + imgTable + " WHERE imgName LIKE '%" + keyWord + "%'",  function(err, rows) {
+    db.all("SELECT imgID, userID, imgPath, likeNum, imgName, imgSign FROM " + imgTable + " WHERE imgName LIKE '%" + keyWord + "%'",  function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
             callback(false);
@@ -376,7 +376,7 @@ exports.selectImagesFuzzily = function (keyWord, callback) {
                 var imgPath = {};
                 rows.forEach(function (row) {
                     imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath,
-                        "imgName":row.imgName, "imgSign":row.imgSign};
+                        "likeNum":row.likeNum, "imgName":row.imgName, "imgSign":row.imgSign};
                     imgPaths[index] = imgPath;
                     index++;
                 });
@@ -391,7 +391,7 @@ exports.selectImagesFuzzily = function (keyWord, callback) {
 };
 
 exports.selectFollowImagesFuzzily = function (userID, keyWord, callback) {
-    db.all("SELECT imgID, userID, imgPath, imgName, imgSign FROM " + imgTable + "," + followTable +
+    db.all("SELECT imgID, userID, imgPath, likeNum, imgName, imgSign FROM " + imgTable + "," + followTable +
         " WHERE followerID=? and followedID=userID and imgName LIKE '%" + keyWord + "%'", userID, function(err, rows) {
         if( err ){
             util.log("search img wrong : select img");
@@ -404,7 +404,7 @@ exports.selectFollowImagesFuzzily = function (userID, keyWord, callback) {
                 var imgPath = {};
                 rows.forEach(function (row) {
                     imgPath = {"imgID":row.imgID, "userID":row.userID, "imgPath":row.imgPath,
-                        "imgName":row.imgName, "imgSign":row.imgSign};
+                        "likeNum":row.likeNum, "imgName":row.imgName, "imgSign":row.imgSign};
                     imgPaths[index] = imgPath;
                     index++;
                 });
@@ -432,15 +432,17 @@ exports.insertImage = function (userID, imgDescription, imgName, imgSign, callba
             var imgPath = "/images/" + userID + "/" + imgName;
             var likeNum = 0;
             var imgSign = "noSign";
-            db.run("INSERT INTO " + imgTable + " VALUES(?,?,?,?,?,?,?,?,?)",
-                imgID, userID, imgPath, imgDescription, likeNum, imgName, maxRank, imgSign, imgSign, function(err) {
+            db.run("INSERT INTO " + imgTable + " VALUES(?,?,?,?,?,?,?,?)",
+                imgID, userID, imgPath, imgDescription, likeNum, imgName, maxRank, imgSign, function(err) {
                     if( err ){
                         util.log(userID + " fail to insert img : " + imgName);
                         callback({"status":false});
                     }
                     else{
                         util.log(userID + " succeed inserting img : " + imgName);
-                        callback({"status":true, "imgID":imgID, "imgPath":imgPath, "likeNum":likeNum, "imgSign":imgSign});
+                        var result = {"status":true, "imgID":imgID, "userID":userID, "imgPath":imgPath,
+                            "likeNum":likeNum, "imgSign":imgSign}
+                        callback( result );
                     }
                 });
         }

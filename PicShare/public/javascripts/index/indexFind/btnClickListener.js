@@ -18,7 +18,8 @@ $("#searchLogo").click(function () {
                     if ( imgInfo.imgPath ) {
                         var divImg = "<div class='imgList' id='findSearch-"+ imgInfo.imgID + "'>" +
                             "<img id='searchImagePath-" + imgInfo.imgID + "'src='" + imgInfo.imgPath + "'/>" +
-                            "<button id='findSearchBtn-"+ imgInfo.imgID + "' class='goodBtn' onclick='giveImageGood(this, \"searchLike-\")'>👍</button>" +
+                            "<button id='findSearchBtn-"+ imgInfo.imgID + "' class='goodBtn' " +
+                                "onclick='searchGiveImageGood(this)'>👍 " + imgInfo.likeNum + "</button>" +
                             "<button id='searchLike-"+ imgInfo.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
                             "<input class='CommonInput SignInput justForFindInputShowSign' value='" + imgInfo.imgSign + "' readonly/>" +
                             "<input class='CommonInput RightInput' value='by " + imgInfo.userID + "' readonly/>" +
@@ -65,6 +66,12 @@ function giveImageGood(obj, prefix) {
             alert('抱歉，点赞失败。。。');
         }
     })
+}
+function mainGiveImageGood(obj) {
+    giveImageGood(obj, "hotLike-");
+}
+function searchGiveImageGood(obj) {
+    giveImageGood(obj, "searchLike-");
 }
 
 

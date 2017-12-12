@@ -9,7 +9,7 @@ $(function () {
                     var divImg = "<div class='imgList' id='findHot-"+ imgInfo.imgID +"'>" +
                         "<img id='findImagePath-" + imgInfo.imgID + "' src='" + imgInfo.imgPath + "'/>" +
                         "<button id='findHot-"+ imgInfo.imgID +"' class='goodBtn' " +
-                        "onclick='giveImageGood(this, \"hotLike-\")'>👍 " + imgInfo.likeNum + "</button>" +
+                            "onclick='mainGiveImageGood(this)'>👍 " + imgInfo.likeNum + "</button>" +
                         "<button id='hotLike-"+ imgInfo.imgID + "' class='commonBtn' style='display: none' disabled>❤️</button>" +
                         "<input class='CommonInput SignInput justForFindInputShowSign' id='findImageSign-' value='" + imgInfo.imgSign + "' readonly/>" +
                         "<input class='CommonInput RightInput' value='by " + imgInfo.userID + "' readonly/>" +
