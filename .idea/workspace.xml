@@ -1,7 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57d32d43-a881-481e-b68d-abb8a1704f57" name="Default" comment="" />
+    <list default="true" id="57d32d43-a881-481e-b68d-abb8a1704f57" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/PicShare.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/PicShare.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/img/zoomify.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/img/zoomify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/img/zoomify.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/img/zoomify.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/constellation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/constellation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/coolBackground.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/coolBackground.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/indexFind/btnClickListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/indexFind/btnClickListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/indexFind/initializePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/indexFind/initializePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/indexFollow/btnClickListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/indexFollow/btnClickListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/indexFollow/initializePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/indexFollow/initializePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/indexMine/btnClickListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/indexMine/btnClickListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/indexMine/initializePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/indexMine/initializePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index/logoShowInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index/logoShowInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/info/followList/btnClickListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/info/followList/btnClickListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/info/followList/initializePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/info/followList/initializePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/info/profile/btnClickListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/info/profile/btnClickListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/info/profile/initializePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/info/profile/initializePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/jquery/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery/jquery-ui.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/jquery/jquery.ui.widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery/jquery.ui.widget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/other/md5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/other/md5.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/other/stopExecutionOnTimeout.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/other/stopExecutionOnTimeout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/other/viewer.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/other/viewer.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/other/webuploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/other/webuploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/sign/signIn/btnClickListener.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/sign/signUp/btnClickListener.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery/jquery-3.2.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/index/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/index/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/index/indexFind.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/index/indexFind.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/index/indexMine.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/index/indexMine.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/info/followList/followList.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/info/followList/followList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/info/followList/select.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/info/followList/select.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/info/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/info/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/jquery/jquery-ui.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery/jquery-ui.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/jquery/jquery-ui.structure.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery/jquery-ui.structure.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/jquery/jquery-ui.theme.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery/jquery-ui.theme.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/jquery/jquery.fileupload-ui.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery/jquery.fileupload-ui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/jquery/jquery.fileupload.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery/jquery.fileupload.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/jquery/jquery.mCustomScrollbar.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jquery/jquery.mCustomScrollbar.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/blueimp-gallery.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/blueimp-gallery.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/imgChange.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/imgChange.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/slideNav.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/slideNav.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/viewer.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/viewer.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/webuploader.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/webuploader.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/zoomify.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/zoomify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/other/zoomify.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/other/zoomify.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/sign.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/routes/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/sign.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/sign.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index/indexFind.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/indexFind.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index/indexFollow.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/indexFollow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index/indexMine.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/indexMine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/info/followList.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/info/followList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/info/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/info/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/sign/signIn.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/sign/signUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/sign/signUp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/view_jade/layout.jade" beforeDir="false" afterPath="$PROJECT_DIR$/views/view_jade/layout.jade" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,10 +74,99 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="626">
+              <caret line="48" column="104" selection-start-line="48" selection-start-column="104" selection-end-line="48" selection-end-column="104" />
+              <folding>
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#1664#1670#1" expanded="true" />
+                <element signature="e#1989#1995#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/login.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sign.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/sign.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3">
+              <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/common.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="684">
+              <caret line="168" column="21" selection-start-line="168" selection-start-column="1" selection-end-line="168" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>index</find>
+      <find>javascripts</find>
+      <find>Popper</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>js</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/views/sign/signIn.html" />
+        <option value="$PROJECT_DIR$/views/info/followList.html" />
+        <option value="$PROJECT_DIR$/views/info/profile.html" />
+        <option value="$PROJECT_DIR$/views/index/indexFind.html" />
+        <option value="$PROJECT_DIR$/views/index/indexFollow.html" />
+        <option value="$PROJECT_DIR$/views/index/indexMine.html" />
+        <option value="$PROJECT_DIR$/database/commonFunc.js" />
+        <option value="$PROJECT_DIR$/database/helper.js" />
+        <option value="$PROJECT_DIR$/database/test.js" />
+        <option value="$PROJECT_DIR$/database/mysql.js" />
+        <option value="$PROJECT_DIR$/database/userAcountDao.js" />
+        <option value="$PROJECT_DIR$/routes/sign.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/sign/signIn/btnClickListener.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/public/js/sign/signIn/btnClickListener.js" />
+        <option value="$PROJECT_DIR$/public/js/sign/signUp/btnClickListener.js" />
+        <option value="$PROJECT_DIR$/views/sign/signUp.html" />
+        <option value="$PROJECT_DIR$/public/css/sign.css" />
+        <option value="$PROJECT_DIR$/public/css/login.ts" />
+        <option value="$PROJECT_DIR$/public/css/common.css" />
+        <option value="$PROJECT_DIR$/public/css/login.css" />
+        <option value="$PROJECT_DIR$/views/login.html" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -27,26 +177,25 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="827" />
   </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -59,19 +208,152 @@
               <item name="PicShare" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+              <item name="4.0.0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+              <item name="4.0.0" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap.css" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+              <item name="4.0.0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+              <item name="indexFind" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="jquery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="Vue" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="Vue" type="462c0819:PsiDirectoryNode" />
+              <item name="2.5.16" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="info" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PicShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PicShare" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="sign" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/views" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -84,9 +366,6 @@
         </RuleState>
       </list>
     </option>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -101,32 +380,35 @@
       <workItem from="1511508331185" duration="48000" />
       <workItem from="1512489968921" duration="3000" />
       <workItem from="1513099534343" duration="45000" />
+      <workItem from="1533451302645" duration="9689000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96000" />
+    <option name="totallyTimeSpent" value="9785000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="827" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49882075" visible="true" weight="0.14652778" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32900944" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Structure" order="1" sideWeight="0.5011792" side_tool="true" weight="0.14652778" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,18 +417,228 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/HC/home.html" />
     <entry file="file://$PROJECT_DIR$/HC/home.html" />
     <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/说明文档.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/img/zoomify.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/index/indexMine/btnClickListener.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/info/followList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="89" column="49" lean-forward="true" selection-start-line="89" selection-start-column="49" selection-end-line="89" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/indexFollow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/indexMine.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="110" column="53" selection-start-line="110" selection-start-column="53" selection-end-line="110" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/info/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/ID.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/userLog/3467">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/commonFunc.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/indexFind.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="89" column="53" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/index/coolBackground.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/mysql.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/info.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-158" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="63" column="21" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/sqlite3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-148">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/sign.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1387">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/userAcountDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/test.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/sign/signIn/btnClickListener.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/sign/signUp.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/sign/signUp/btnClickListener.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Vue/vue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/index/indexFind/initializePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#style#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/meta.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/bootstrap/4.0.0/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/login.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/bootstrap/4.0.0/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="8354" column="1" selection-start-line="8354" selection-start-column="1" selection-end-line="8354" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/sign.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="168" column="21" selection-start-line="168" selection-start-column="1" selection-end-line="168" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="48" column="104" selection-start-line="48" selection-start-column="104" selection-end-line="48" selection-end-column="104" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#1664#1670#1" expanded="true" />
+            <element signature="e#1989#1995#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

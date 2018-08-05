@@ -1,0 +1,26 @@
+
+
+.logo img {
+    width: 180px;
+    margin: 20% auto 0;
+    vertical-align: middle;
+    border: 0;
+}
+
+
+
+.main {
+    width: 100%;
+    margin: 20% auto 0;
+    padding: 50px 50px 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0,0,0,.1);
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.main .text {
+    font-family: Georgia,Times New Roman,Times,Songti SC,serif;
+    font-weight: 400;
+}

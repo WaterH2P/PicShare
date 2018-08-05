@@ -17,9 +17,9 @@ var IDDistance = 5;
 
 /* GET sign page. */
 
-router.route('/signIn')
+router.route('/login')
     .get(function(req, res) {
-        res.render('sign/signIn');
+        res.render('login');
     })
     .post(function (req, res) {
         var userID = req.body.userID;

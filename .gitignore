@@ -2,3 +2,17 @@
 .DS_Store
 .idea
 node_modules
+
+bootstrap.css
+bootstrap.css.map
+bootstrap-grid.css
+bootstrap-grid.css.map
+bootstrap-reboot.css
+bootstrap-reboot.css.map
+
+bootstrap.bundle.js
+bootstrap.bundle.js.map
+bootstrap.js
+bootstrap.js.map
+
+vue.js

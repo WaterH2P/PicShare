@@ -36,11 +36,11 @@ app.use( express.static(path.join(__dirname, 'public')) );
 
 app.use( function (req, res, next) {
     if( !req.session.logged_in ){
-        if( req.url==='/signIn' || req.url==='/signUp' ){
+        if( req.url==='/login' || req.url==='/signUp' ){
             next();
         }
         else {
-            res.redirect('/signIn');
+            res.redirect('/login');
         }
     }
     else if( req.session.user ){
@@ -54,7 +54,7 @@ app.use( '/logout', function (req, res) {
     delete userOnline[req.session.user];
     req.session.logged_in = false;
     req.session.user = null;
-    res.redirect('/signIn');
+    res.redirect('/login');
 });
 
 // catch 404 and forward to error handler

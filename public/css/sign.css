@@ -54,19 +54,13 @@ input{
     min-height: 750px;
     text-align: center;
     font-size: 14px;
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
 }
 
 
 /* ==================== logo ==================== */
 
-.sign .logo {
-    position: absolute;
-    top: 10%;
-    margin-left: 10%;
-}
-
-.sign .logo img {
+.logo img {
     width: 180px;
     vertical-align: middle;
     border: 0;
