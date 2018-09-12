@@ -16,34 +16,34 @@
 <body style="background-color: #f1f1f1">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-lg-3">
-                <div class="logo">
+            <div class="col-lg-3 col-md-5 col-sm-12">
+                <div class="logo text-center">
                     <!-- 返回主页 -->
                     <a target="_self" href="">
-                        <img src="images/PicShare.png">
+                        <img src="images/PicShare.png" class="rounded">
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-4 col-md-5 col-sm-12" style="max-width: 420px">
                 <div class="main">
-                    <ul class="nav nav-tabs nav-fill">
+                    <ul class="nav nav-fill">
                         <li class="nav-item">
-                            <a class="nav-link active text" href="/login">登录</a>
+                            <a class="btn btn-block my-active text" href="/login">登录</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text" href="/signUp">注册</a>
+                            <a class="btn btn-block btn-outline-primary my-inactive text" href="/signUp">注册</a>
                         </li>
                     </ul>
                     
-                    <div class="width-100-pct height-30 visibility-hidden"></div>
+                    <div class="width-100-pct height-40 visibility-hidden"></div>
 
                     <form role="form" id="signInForm" accept-charset="utf-8" method="post" onsubmit="return false">
                         <div class="form-group">
-                            <input type="text" class="form-control text" id="account" placeholder="账号" required>
+                            <input type="text" class="form-control text" id="account" placeholder="账号">
                             <small class="form-text text-muted font-10">&nbsp;</small>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control text" id="password" placeholder="密码" required>
+                            <input type="password" class="form-control text" id="password" placeholder="密码">
                             <small class="form-text text-muted font-10">&nbsp;</small>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block text hover-cursor-pointer" id="signInSubmit">登录</button>
@@ -56,35 +56,39 @@
     <script src="js/other/md5.min.js"></script>
 	<script src="js/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/bootstrap/4.0.0/bootstrap.min.js"></script>
+    <script src="js/vue/2.5.16/vue.js"></script>
 
+    <script>
+
+    </script>
     <!-- 按钮动作监听 -->
     <script>
         $("#signInSubmit").click(function () {
-            var IDReady = true;
+            var accountReady = true;
             var passwordReady = true;
 
-            var userID = $("#userID").val().toString();
-            var userPassword = $("#userPassword").val().toString();
+            var account = $("#account").val().toString();
+            var password = $("#password").val().toString();
 
-            if( userID===undefined || userID.length===0 ){
-                $("#userID").css("border","1px solid red");
-                IDReady = false;
+            if( account===undefined || account.length===0 ){
+                $("#account").css("border","1px solid red");
+                accountReady = false;
             }
             else {
-                $("#userID").css("border","1px solid #c8c8c8");
-                IDReady = true;
+                $("#account").css("border","1px solid #c8c8c8");
+                accountReady = true;
             }
-            if( userPassword===undefined || userPassword.length===0 ){
-                $("#userPassword").css("border","1px solid red");
+            if( password===undefined || password.length===0 ){
+                $("#password").css("border","1px solid red");
                 passwordReady = false;
             }
             else {
-                $("#userPassword").css("border","1px solid #c8c8c8");
+                $("#password").css("border","1px solid #c8c8c8");
                 passwordReady = true;
             }
-            if( IDReady && passwordReady ) {
-                var passwordHash = md5(userPassword);
-                var data = {"userID": userID, "userPassword": passwordHash};
+            if( accountReady && passwordReady ) {
+                var passwordHash = md5(password);
+                var data = {"account": account, "password": passwordHash};
                 $.post('login', data, function (res) {
                     $("#aSign").hide();
                     $("#signInForm").hide();

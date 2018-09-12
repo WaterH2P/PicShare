@@ -24,3 +24,13 @@
     font-family: Georgia,Times New Roman,Times,Songti SC,serif;
     font-weight: 400;
 }
+
+.main a.my-active {
+    color: #007bff;
+    border: none;
+    border-bottom: 2px solid #007bff;
+}
+
+.main a.my-inactive {
+    border: none;
+}
